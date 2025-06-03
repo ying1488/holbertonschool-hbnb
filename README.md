@@ -53,25 +53,25 @@ User
 This entity represents a registered user of the system, which can be either a customer or admin. 
 
 Attributes
-Id: Unique identifier
-First_name: first name of the user
-Last_name: last name of the user
-Email: registered email for authentication
-Password: password used for authentication
-Admin: A boolean which is used to determine if the user is an admin or not
-Created: Timestamp of when the user was created
-Updated: Timestamp of when the user was last updated
+* Id: Unique identifier
+* First_name: first name of the user
+* Last_name: last name of the user
+* Email: registered email for authentication
+* Password: password used for authentication
+* Admin: A boolean which is used to determine if the user is an admin or not
+* Created: Timestamp of when the user was created
+* Updated: Timestamp of when the user was last updated
 
 	
-    Methods
-init(...): Initializes a User object
-create(...): Allows for the creation of a new User
-update(): Updates the information regarding a User
-delete(): Removes a User from the system
-
+Methods
+* init(...): Initializes a User object
+* create(...): Allows for the creation of a new User
+* update(): Updates the information regarding a User
+* delete(): Removes a User from the system
+ 
 Relationships
-One User can have many Places
-One User can write many Reviews
+* One User can have many Places
+* One User can write many Reviews
 
 
 	
