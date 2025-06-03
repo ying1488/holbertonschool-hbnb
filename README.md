@@ -72,7 +72,6 @@ This entity represents a registered user of the system, which can be either a cu
 * One User can have many Places
 * One User can write many Reviews
 
-
 	
 ### Review
 	
@@ -98,10 +97,7 @@ The entity represents a review that a User is able to leave on a place.
 * A Review is left on a Place
 
 
-
 ### Place
-		
-	
 The Place entity represents a property listing that a User is able to interact with.
 	
 #### Attributes
@@ -129,7 +125,6 @@ The Place entity represents a property listing that a User is able to interact w
 
 
 ### Amenity
-	
 The Amenity entity represents a feature or facility that a renter can expect to find a Place that they choose to hire.
 
 #### Attributes
@@ -210,7 +205,7 @@ Design decisions and their rationale - the query-based interaction helps with th
 Summary for sequence diagrams
 These diagrams help to clarify the relationship between three layers - Presentation, Business Logic and Persistence using Facade Pattern at the service layer. The different component has single responsibility and a defined role. 
 
-##👨‍💻👩‍💻Developed By:
+## 👨‍💻👩‍💻Developed By:
 * Jonathan Charalambous
 * Sophie 
 * Ying Tai
