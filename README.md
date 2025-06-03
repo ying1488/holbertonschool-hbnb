@@ -124,7 +124,7 @@ The Place entity represents a property listing that a User is able to interact w
 * A Place can have many Amenities
 
 
-### Amenity
+### 🛎️ Amenity
 The Amenity entity represents a feature or facility that a renter can expect to find a Place that they choose to hire.
 
 #### Attributes
@@ -148,7 +148,7 @@ Many Amenities can be part of a Place
 ## 📬 API Interaction Flow
 The purpose of these diagrams is to illustrate how the API calls interact with different HBnB applications - Presentation, Business logic and Persistence layers. It helps to demonstrate how different components interact with each other to help with user requests and clarify responsibilities across the systems.
 
-### User registration Diagram
+### 👤 User registration Diagram
 This is to demonstrate how the end to end flow when a user signs up for an account.
 ![Alt text](part1/img/UserRegCreate.png)
 
@@ -160,7 +160,7 @@ This is to demonstrate how the end to end flow when a user signs up for an accou
 
 Design decisions and their rationale - it forms the base of user id and session management, and established the standard communication pattern for all the created operations.
 
-### Place Creation Diagram
+### 📍 Place Creation Diagram
 This is to show how a login user creates a new property listing.
 ![Alt text](part1/img/propCreate.png)
 
@@ -174,7 +174,7 @@ This is to show how a login user creates a new property listing.
 Design decisions and their rationale - it demonstrated how new resources are created.
 
 
-### Review Submission Diagram
+### 👍 Review Submission Diagram
 This is to show how users can submit reviews for existing properties
 ![Alt text](part1/img/ReviewService.png)
 
@@ -188,12 +188,12 @@ This is to show how users can submit reviews for existing properties
 Design decisions and their rationale - it supports the feedback from users to the property listing. 
 
 
-### Fetching a List of Places
+### 🗺️ Fetching a List of Places
 This is to show the flow when the user requests a list of filtered available properties.
 
 ![Alt text](part1/img/PropSubmitReq.png)
 
-#### Key components  includes
+#### Key components includes
 * User - sends a search request to the API
 * API controller - the controllers forwards the request to the PropertyService
 * PropertyService - retrieved the matching properties from the database
