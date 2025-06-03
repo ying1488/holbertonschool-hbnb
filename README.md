@@ -133,24 +133,24 @@ The Place entity represents a property listing that a User is able to interact w
 The Amenity entity represents a feature or facility that a renter can expect to find a Place that they choose to hire.
 
 #### Attributes
-id : Unique identifier
-Name: The name used to define the amenity
-description : Brief sentence or paragraph to provide information on the facility or service
-Created: Timestamp of when the Amenity was created
-Updated: Timestamp of when the Amenity was last updated
+* id : Unique identifier
+* Name: The name used to define the amenity
+* Description : Brief sentence or paragraph to provide information on the facility or service
+* Created: Timestamp of when the Amenity was created
+* Updated: Timestamp of when the Amenity was last updated
 
 #### Methods
-init(...): Initializes a Amenity object
-create(...): Allows for the creation of a new Amenity 
-update(): Updates the Amenity 
-delete(): Removes a Amenity from the system
-show(): Lists all reviews of a Amenity
+* init(...): Initializes a Amenity object
+* create(...): Allows for the creation of a new Amenity 
+* update(): Updates the Amenity 
+* delete(): Removes a Amenity from the system
+* show(): Lists all reviews of a Amenity
 	
 #### Relationships
 Many Amenities can be part of a Place
 
 
-##📬 API Interaction Flow
+## 📬 API Interaction Flow
 The purpose of these diagrams is to illustrate how the API calls interact with different HBnB applications - Presentation, Business logic and Persistence layers. It helps to demonstrate how different components interact with each other to help with user requests and clarify responsibilities across the systems.
 
 ### User registration Diagram
@@ -158,10 +158,10 @@ This is to demonstrate how the end to end flow when a user signs up for an accou
 ![Alt text](part1/img/UserRegCreate.png)
 
 #### Key components includes
-User - started the request
-UserRegistration - business logic for user registration
-API controller - it handles the HTTP request
-Database - store the user data
+* User - started the request
+* UserRegistration - business logic for user registration
+* API controller - it handles the HTTP request
+* Database - store the user data
 
 Design decisions and their rationale - it forms the base of user id and session management, and established the standard communication pattern for all the created operations.
 
@@ -171,10 +171,10 @@ This is to show how a login user creates a new property listing.
 
 
 #### Key components includes
-User - submits the property data
-API controller - it forward to the PropertyService
-PropertyService - check for user authorization and validity
-Database - data is saved and response is returned.
+* User - submits the property data
+* API controller - it forward to the PropertyService
+* PropertyService - check for user authorization and validity
+* Database - data is saved and response is returned.
 
 Design decisions and their rationale - it demonstrated how new resources are created.
 
@@ -185,10 +185,10 @@ This is to show how users can submit reviews for existing properties
 
 
 #### Key components includes
-User - send review data with API
-API controller - Validates requests and checks if the property exists.
-ReviewService - the review object is created 
-Database - data is saved and a confirmation is returned to the user.
+* User - send review data with API
+* API controller - Validates requests and checks if the property exists.
+* ReviewService - the review object is created 
+* Database - data is saved and a confirmation is returned to the user.
 
 Design decisions and their rationale - it supports the feedback from users to the property listing. 
 
@@ -199,10 +199,10 @@ This is to show the flow when the user requests a list of filtered available pro
 ![Alt text](part1/img/PropSubmitReq.png)
 
 #### Key components  includes
-User - sends a search request to the API
-API controller - the controllers forwards the request to the PropertyService
-PropertyService - retrieved the matching properties from the database
-Database - the results are sent back to the user.
+* User - sends a search request to the API
+* API controller - the controllers forwards the request to the PropertyService
+* PropertyService - retrieved the matching properties from the database
+* Database - the results are sent back to the user.
 
 
 Design decisions and their rationale - the query-based interaction helps with the discoverability and user to find the correct properties efficiently. 
@@ -211,8 +211,8 @@ Summary for sequence diagrams
 These diagrams help to clarify the relationship between three layers - Presentation, Business Logic and Persistence using Facade Pattern at the service layer. The different component has single responsibility and a defined role. 
 
 ##👨‍💻👩‍💻Developed By:
-Jonathan Charalambous
-Sophie 
-Ying Tai
-Eli Malana
+* Jonathan Charalambous
+* Sophie 
+* Ying Tai
+* Eli Malana
 
