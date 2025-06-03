@@ -208,6 +208,6 @@ These diagrams help to clarify the relationship between three layers - Presentat
 ## 👨‍💻👩‍💻Developed By:
 * Jonathan Charalambous
 * Sophie 
-* Ying Tai
+* Ying 
 * Eli Malana
 
