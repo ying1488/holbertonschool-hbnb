@@ -49,7 +49,7 @@ Database Operations (Business Logic and Persistence layers)
 
 ![Alt text](part1/img/BL.png)
 
-### User
+### 👤 User
 This entity represents a registered user of the system, which can be either a customer or admin. 
 
 #### Attributes
@@ -73,7 +73,7 @@ This entity represents a registered user of the system, which can be either a cu
 * One User can write many Reviews
 
 	
-### Review
+### 👍 Review
 	
 The entity represents a review that a User is able to leave on a place.
 
@@ -97,7 +97,7 @@ The entity represents a review that a User is able to leave on a place.
 * A Review is left on a Place
 
 
-### Place
+### 📍 Place
 The Place entity represents a property listing that a User is able to interact with.
 	
 #### Attributes
