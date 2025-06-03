@@ -2,16 +2,19 @@
 
 # 🚀 HBnB Evolution
 a simplified version of an AirBnB-like application
+
 ## 📚 Table of Contents
-- [About](#about)
-- [High-Level Package Diagram](#High-Level Package Diagram)
-- [Business Logic Layer](#Detailed Class Diagram for Business Logic Layer)
-- [Sequence Diagrams for API Calls](#API Interaction Flow)
--[Developed By: ](🧑‍💻)
+- About
+- High-Level Package Diagram
+- Business Logic Layer
+- Sequence Diagrams for API Calls
+- Developed By:
 
 ## 🧠 About
 The HBnB Evolution project is a simplified, modular AirBnB-like platform designed to manage properties, users, amenities, and reviews in a structured and scalable architecture. The goal of HBnB Evolution is to build a platform that allows users to manage rental properties, share reviews, and associate amenities with listed places. 
+
 Users can register as guests or administrators, create and manage property listings, and provide feedback in the form of reviews. The application is structured to support CRUD operations for Users, Places, Amenities, and Reviews, while enforcing essential business rules such as ownership, relationships, and audit tracking.
+
 This documentation covers:
 A high-level overview of system architecture using a layered approach.
 Detailed business logic design through class diagrams.
@@ -24,6 +27,8 @@ By clearly defining the responsibilities and interactions of each component, thi
 ##🗂️ High-Level Package Diagram
 Overview
 The HBnB Evolution application is a structured around a three-layer architecture:
+
+![Alt text](part1/img/HIghLevelArc.png)
 
 Presentation Layer
 Purpose: This is the interface between users and the system.
@@ -45,7 +50,7 @@ Database Operations (Business Logic and Persistence layers)
 
 ##🗃️Business Logic Layer
 
-
+![Alt text](part1/img/BL.png)
 
 User
 This entity represents a registered user of the system, which can be either a customer or admin. 
@@ -60,7 +65,8 @@ Admin: A boolean which is used to determine if the user is an admin or not
 created: Timestamp of when the user was created
 Updated: Timestamp of when the user was last updated
 
-	Methods
+	
+    Methods
 init(...): Initializes a User object
 create(...): Allows for the creation of a new User
 update(): Updates the information regarding a User
@@ -148,13 +154,13 @@ Relationships
 
 Many Amenities can be part of a Place
 
+
 ##📬 API Interaction Flow
 The purpose of these diagrams is to illustrate how the API calls interact with different HBnB applications - Presentation, Business logic and Persistence layers. It helps to demonstrate how different components interact with each other to help with user requests and clarify responsibilities across the systems.
 
 User registration Diagram
 This is to demonstrate how the end to end flow when a user signs up for an account.
-
-
+![Alt text](part1/img/UserRegCreate.png)
 
 Key components includes
 User - started the request
@@ -166,7 +172,7 @@ Design decisions and their rationale - it forms the base of user id and session 
 
 Place Creation Diagram
 This is to show how a login user creates a new property listing.
-
+![Alt text](part1/img/propCreate.png)
 
 
 Key components includes
@@ -180,7 +186,7 @@ Design decisions and their rationale - it demonstrated how new resources are cre
 
 Review Submission Diagram
 This is to show how users can submit reviews for existing properties
-
+![Alt text](part1/img/ReviewService.png)
 
 
 Key components includes
@@ -195,7 +201,7 @@ Design decisions and their rationale - it supports the feedback from users to th
 Fetching a List of Places
 This is to show the flow when the user requests a list of filtered available properties.
 
-
+![Alt text](part1/img/PropSubmitReq.png)
 
 Key components  includes
 User - sends a search request to the API
