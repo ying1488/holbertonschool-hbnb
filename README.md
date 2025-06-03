@@ -1,5 +1,3 @@
-# holbertonschool-hbnb 
-
 # 🚀 HBnB Evolution
 a simplified version of an AirBnB-like application
 
@@ -43,6 +41,8 @@ Purpose: Abstracts all direct interactions with the database.
 Communication between the layers leverages the: 
 Facade Pattern (Presentation Layer and Business Logic Layer)
 Database Operations (Business Logic and Persistence layers)
+
+
 
 
 ## 🗃️Business Logic Layer
