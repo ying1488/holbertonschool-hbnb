@@ -25,7 +25,7 @@ By clearly defining the responsibilities and interactions of each component, thi
 
 
 ## 🗂️ High-Level Package Diagram
-Overview
+### Overview
 The HBnB Evolution application is a structured around a three-layer architecture:
 
 ![Alt text](part1/img/HIghLevelArc.png)
@@ -49,10 +49,10 @@ Database Operations (Business Logic and Persistence layers)
 
 ![Alt text](part1/img/BL.png)
 
-User
+### User
 This entity represents a registered user of the system, which can be either a customer or admin. 
 
-Attributes
+#### Attributes
 * Id: Unique identifier
 * First_name: first name of the user
 * Last_name: last name of the user
@@ -62,104 +62,102 @@ Attributes
 * Created: Timestamp of when the user was created
 * Updated: Timestamp of when the user was last updated
 
-	
-Methods
+#### Methods
 * init(...): Initializes a User object
 * create(...): Allows for the creation of a new User
 * update(): Updates the information regarding a User
 * delete(): Removes a User from the system
  
-Relationships
+#### Relationships
 * One User can have many Places
 * One User can write many Reviews
 
 
 	
-Review
+### Review
 	
 The entity represents a review that a User is able to leave on a place.
 
-Attributes
-Id: Unique identifier
-Place: The place the review is left on
-User: The user who is leaving the review
-Comment: What the User would like the share about their experience
-Created: Timestamp of when the review was created
-Updated: Timestamp of when the review was last updated
+#### Attributes
+* Id: Unique identifier
+* Place: The place the review is left on
+* User: The user who is leaving the review
+* Comment: What the User would like the share about their experience
+* Created: Timestamp of when the review was created
+* Updated: Timestamp of when the review was last updated
 
-	Methods
-init(...): Initializes a Review object
-create(...): Allows for the creation of a new Review 
-update(): Updates the Review
-delete(): Removes a Review from the system
-show(): Lists all reviews of a place
+#### Methods
+* init(...): Initializes a Review object
+* create(...): Allows for the creation of a new Review 
+* update(): Updates the Review
+* delete(): Removes a Review from the system
+* show(): Lists all reviews of a place
 
-	Relationships
-A Review is left by a User
-A Review is left on a Place
+#### Relationships
+* A Review is left by a User
+* A Review is left on a Place
 
 
 
-Place
+### Place
 		
 	
 The Place entity represents a property listing that a User is able to interact with.
 	
-Attributes
-Id: unique identifier
-Title: name of a listed properly
-Description: Information regarding the Place
-Price: How much the Place will cost to hire
-Latitude/Longitude: Geographical coordinates of the location
-Owner: The User that is the landlord of the property
-Amenities: A list of amenities that you can expect to find at this location
-Created: Timestamp of when the Place was created
-Updated: Timestamp of when the Place was last updated
+#### Attributes
+* Id: unique identifier
+* Title: name of a listed properly
+* Description: Information regarding the Place
+* Price: How much the Place will cost to hire
+* Latitude/Longitude: Geographical coordinates of the location
+* Owner: The User that is the landlord of the property
+* Amenities: A list of amenities that you can expect to find at this location
+* Created: Timestamp of when the Place was created
+* Updated: Timestamp of when the Place was last updated
 
-Methods
-init(...): Initializes a Place object
-create(...): Allows for the creation of a new Place 
-update(): Updates the Place 
-delete(): Removes a Place from the system
-show(): Lists all reviews of a Place
+#### Methods
+* init(...): Initializes a Place object
+* create(...): Allows for the creation of a new Place 
+* update(): Updates the Place 
+* delete(): Removes a Place from the system
+* show(): Lists all reviews of a Place
 
-	Relationships
-A Place has a User
-A Place can have many Reviews
-A Place can have many Amenities
+#### Relationships
+* A Place has a User
+* A Place can have many Reviews
+* A Place can have many Amenities
 
 
-Amenity
+### Amenity
 	
 The Amenity entity represents a feature or facility that a renter can expect to find a Place that they choose to hire.
 
-Attributes
+#### Attributes
 id : Unique identifier
 Name: The name used to define the amenity
 description : Brief sentence or paragraph to provide information on the facility or service
 Created: Timestamp of when the Amenity was created
 Updated: Timestamp of when the Amenity was last updated
 
-Methods
+#### Methods
 init(...): Initializes a Amenity object
 create(...): Allows for the creation of a new Amenity 
 update(): Updates the Amenity 
 delete(): Removes a Amenity from the system
 show(): Lists all reviews of a Amenity
 	
-Relationships
-
+#### Relationships
 Many Amenities can be part of a Place
 
 
 ##📬 API Interaction Flow
 The purpose of these diagrams is to illustrate how the API calls interact with different HBnB applications - Presentation, Business logic and Persistence layers. It helps to demonstrate how different components interact with each other to help with user requests and clarify responsibilities across the systems.
 
-User registration Diagram
+### User registration Diagram
 This is to demonstrate how the end to end flow when a user signs up for an account.
 ![Alt text](part1/img/UserRegCreate.png)
 
-Key components includes
+#### Key components includes
 User - started the request
 UserRegistration - business logic for user registration
 API controller - it handles the HTTP request
@@ -167,12 +165,12 @@ Database - store the user data
 
 Design decisions and their rationale - it forms the base of user id and session management, and established the standard communication pattern for all the created operations.
 
-Place Creation Diagram
+### Place Creation Diagram
 This is to show how a login user creates a new property listing.
 ![Alt text](part1/img/propCreate.png)
 
 
-Key components includes
+#### Key components includes
 User - submits the property data
 API controller - it forward to the PropertyService
 PropertyService - check for user authorization and validity
@@ -181,12 +179,12 @@ Database - data is saved and response is returned.
 Design decisions and their rationale - it demonstrated how new resources are created.
 
 
-Review Submission Diagram
+### Review Submission Diagram
 This is to show how users can submit reviews for existing properties
 ![Alt text](part1/img/ReviewService.png)
 
 
-Key components includes
+#### Key components includes
 User - send review data with API
 API controller - Validates requests and checks if the property exists.
 ReviewService - the review object is created 
@@ -195,12 +193,12 @@ Database - data is saved and a confirmation is returned to the user.
 Design decisions and their rationale - it supports the feedback from users to the property listing. 
 
 
-Fetching a List of Places
+### Fetching a List of Places
 This is to show the flow when the user requests a list of filtered available properties.
 
 ![Alt text](part1/img/PropSubmitReq.png)
 
-Key components  includes
+#### Key components  includes
 User - sends a search request to the API
 API controller - the controllers forwards the request to the PropertyService
 PropertyService - retrieved the matching properties from the database
