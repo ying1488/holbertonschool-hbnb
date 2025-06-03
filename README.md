@@ -8,7 +8,7 @@ a simplified version of an AirBnB-like application
 - High-Level Package Diagram
 - Business Logic Layer
 - Sequence Diagrams for API Calls
-- Developed By:
+
 
 ## 🧠 About
 The HBnB Evolution project is a simplified, modular AirBnB-like platform designed to manage properties, users, amenities, and reviews in a structured and scalable architecture. The goal of HBnB Evolution is to build a platform that allows users to manage rental properties, share reviews, and associate amenities with listed places. 
@@ -24,7 +24,7 @@ By clearly defining the responsibilities and interactions of each component, thi
 
 
 
-##🗂️ High-Level Package Diagram
+## 🗂️ High-Level Package Diagram
 Overview
 The HBnB Evolution application is a structured around a three-layer architecture:
 
@@ -45,10 +45,7 @@ Facade Pattern (Presentation Layer and Business Logic Layer)
 Database Operations (Business Logic and Persistence layers)
 
 
-
-
-
-##🗃️Business Logic Layer
+## 🗃️Business Logic Layer
 
 ![Alt text](part1/img/BL.png)
 
@@ -62,7 +59,7 @@ Last_name: last name of the user
 Email: registered email for authentication
 Password: password used for authentication
 Admin: A boolean which is used to determine if the user is an admin or not
-created: Timestamp of when the user was created
+Created: Timestamp of when the user was created
 Updated: Timestamp of when the user was last updated
 
 	
