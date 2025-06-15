@@ -21,3 +21,10 @@ class Amenity(BaseModel):
         self.id = None
         self.created_at = None
         self.updated_at = None
+    
+    def update(self, data):
+        """Update the attributes of the amenity based on the provided dictionary."""
+        for key, value in data.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
+        self.save()

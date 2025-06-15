@@ -50,6 +50,9 @@ class User(BaseModel):
         self.id = None
         self.created_at = None
         self.updated_at = None
+    
+    def update(self, data):
+        return super().update(data)
 
     
 
