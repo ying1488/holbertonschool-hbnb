@@ -1,6 +1,16 @@
 import uuid
 from app.persistence.repository import InMemoryRepository
 from app.models.user import User
+from app.models.place import Place
+from app.models.amenity import Amenity
+
+class InvalidPlaceDataError(Exception):
+    """Raised when place data is invalid."""
+
+class PlaceNotFoundError(Exception):
+    """Raised when a place with the given ID is not found."""
+
+class InvalidPlaceUpdateError(Exception):
 
 class HBnBFacade:
     def __init__(self):
@@ -46,6 +56,8 @@ class HBnBFacade:
     def get_place(self, place_id):
         # Logic will be implemented in later tasks
         pass
+
+    # ---------- AMENITIES ----------
     
     def create_amenity(self, amenity_data):
         # Placeholder for logic to create an amenity
@@ -81,23 +93,28 @@ class HBnBFacade:
         self.amenity_repo.save(amenity_id, amenity)
         return {"message": "Amenity updated successfully"}
     
-    # This is for places
+    # ---------- PLACES ----------
+
     def create_place(self, place_data):
         # Placeholder for logic to create a place, including validation for price, latitude, and longitude
         try:
             new_place = Place(**place_data)
-            self.db.save_place(new_place)
+            self.place_repo.add(new_place)
             return new_place
         except ValueError as e:
-            raise Exception(f"Invalid data: {str(e)}")
+            raise InvalidPlaceDataError(f"Invalid data: {str(e)}") from e
 
     def get_place(self, place_id):
         # Placeholder for logic to retrieve a place by ID, including associated owner and amenities
-        place = self.db.get_place_by_id(place_id)
+        place = self.place_repo.get(place_id)
         if not place:
             return None
-        owner = self.db.get_user_by_id(place.owner_id)
-        amenities = [self.db.get_amenity_by_id(aid) for aid in place.amenities]
+        owner = self.user_repo.get(place.owner_id)
+        amenities = [
+        self.amenity_repo.get(amenity_id)
+        for amenity_id in getattr(place, "amenities", [])
+        if self.amenity_repo.get(amenity_id)
+        ]
 
         return {
             "id": place.id,
@@ -123,12 +140,12 @@ class HBnBFacade:
                 "latitude": p.latitude,
                 "longitude": p.longitude
             }
-            for p in self.db.get_all_places()
+            for p in self.place_repo.all().values()
         ]
 
     def update_place(self, place_id, place_data):
         # Placeholder for logic to update a place
-        place = self.db.get_place_by_id(place_id)
+        place = self.place_repo.get(place_id)
         if not place:
             return None
 
@@ -136,7 +153,7 @@ class HBnBFacade:
             for key, value in place_data.items():
                 if hasattr(place, key):
                     setattr(place, key, value)
-            self.db.update_place(place)
+            self.place_repo.save(place_id, place)
             return place
         except ValueError as e:
-            raise Exception(f"Invalid update data: {str(e)}")
+            raise InvalidPlaceUpdateError(f"Invalid update data: {str(e)}") from e
