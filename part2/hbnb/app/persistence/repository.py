@@ -43,6 +43,10 @@ class InMemoryRepository(Repository):
         obj = self.get(obj_id)
         if obj:
             obj.update(data)
+            
+    def all(self):
+        """Return all stored objects."""
+        return self._storage
 
     def delete(self, obj_id):
         if obj_id in self._storage:
@@ -50,3 +54,4 @@ class InMemoryRepository(Repository):
 
     def get_by_attribute(self, attr_name, attr_value):
         return next((obj for obj in self._storage.values() if getattr(obj, attr_name) == attr_value), None)
+    

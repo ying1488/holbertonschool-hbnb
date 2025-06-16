@@ -33,11 +33,12 @@ class HBnBFacade:
 
     def get_amenity(self, amenity_id):
         # Placeholder for logic to retrieve an amenity by ID
-        pass
+        amenity = self.amenity_repo.get(amenity_id)
+        return amenity
 
     def get_all_amenities(self):
         # Placeholder for logic to retrieve all amenities
-        pass
+        return list(self.amenity_repo.all().values())
 
     def update_amenity(self, amenity_id, amenity_data):
         # Placeholder for logic to update an amenity
