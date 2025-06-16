@@ -22,6 +22,25 @@ class HBnBFacade:
     
     def get_all_users(self):
         return list(self.user_repo.all().values())
+    
+    def update_user_name(self, user_id, first_name=None, last_name=None):
+        user = self.user_repo.get(user_id)
+        if not user:
+            return None
+        if first_name:
+            user.first_name = first_name
+        if last_name:
+            user.last_name = last_name
+        self.user_repo.save(user_id, user)
+        return {"message": "User name updated successfully"}
+    
+    def updae_user_email(self, user_id, email):
+        user = self.user_repo.get(user_id)
+        if not user:
+            return None
+        user.email = email
+        self.user_repo.save(user_id, user)
+        return {"message": "User email updated successfully"}
 
     # Placeholder method for fetching a place by ID
     def get_place(self, place_id):
