@@ -11,6 +11,7 @@ class PlaceNotFoundError(Exception):
     """Raised when a place with the given ID is not found."""
 
 class InvalidPlaceUpdateError(Exception):
+    pass
 
 class HBnBFacade:
     def __init__(self):
