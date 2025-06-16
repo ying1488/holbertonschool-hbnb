@@ -42,4 +42,12 @@ class HBnBFacade:
 
     def update_amenity(self, amenity_id, amenity_data):
         # Placeholder for logic to update an amenity
-        pass
+        amenity = self.amenity_repo.get(amenity_id)
+        if not amenity:
+            return None
+        name = amenity_data.get('name')
+        if not name:
+            raise ValueError("Amenity name is required")
+        amenity['name'] = name
+        self.amenity_repo.save(amenity_id, amenity)
+        return {"message": "Amenity updated successfully"}

@@ -32,6 +32,10 @@ class InMemoryRepository(Repository):
 
     def add(self, obj):
         self._storage[obj.id] = obj
+    
+    def save(self, key, value):
+        """Save or update a value by key."""
+        self._storage[key] = value
 
     def get(self, obj_id):
         return self._storage.get(obj_id)
@@ -43,7 +47,7 @@ class InMemoryRepository(Repository):
         obj = self.get(obj_id)
         if obj:
             obj.update(data)
-            
+
     def all(self):
         """Return all stored objects."""
         return self._storage
