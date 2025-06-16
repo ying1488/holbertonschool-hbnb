@@ -23,7 +23,7 @@ class AmenityList(Resource):
         try:
             amenity = facade.create_amenity(data)
             return amenity, 201
-        except Exception as e:
+        except ValueError as e:
             return {'error': str(e)}, 400
 
     @api.response(200, 'List of amenities retrieved successfully')
@@ -60,7 +60,7 @@ class AmenityResource(Resource):
             if result is None:
                 return {'error': 'Amenity not found'}, 404
             return result, 200
-        except Exception as e:
+        except ValueError as e:
             return {'error': str(e)}, 400
 
     
