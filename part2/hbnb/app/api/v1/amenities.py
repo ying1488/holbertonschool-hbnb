@@ -1,5 +1,5 @@
 from flask_restx import Namespace, Resource, fields
-from flake8 import request
+from flake import request
 from app.services import facade
 
 api = Namespace('amenities', description='Amenity operations')
