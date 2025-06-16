@@ -41,3 +41,5 @@ class AmenityResource(Resource):
         """Update an amenity's information"""
         # Placeholder for the logic to update an amenity by ID
         pass
+
+    
