@@ -80,3 +80,63 @@ class HBnBFacade:
         amenity['name'] = name
         self.amenity_repo.save(amenity_id, amenity)
         return {"message": "Amenity updated successfully"}
+    
+    # This is for places
+    def create_place(self, place_data):
+        # Placeholder for logic to create a place, including validation for price, latitude, and longitude
+        try:
+            new_place = Place(**place_data)
+            self.db.save_place(new_place)
+            return new_place
+        except ValueError as e:
+            raise Exception(f"Invalid data: {str(e)}")
+
+    def get_place(self, place_id):
+        # Placeholder for logic to retrieve a place by ID, including associated owner and amenities
+        place = self.db.get_place_by_id(place_id)
+        if not place:
+            return None
+        owner = self.db.get_user_by_id(place.owner_id)
+        amenities = [self.db.get_amenity_by_id(aid) for aid in place.amenities]
+
+        return {
+            "id": place.id,
+            "title": place.title,
+            "description": place.description,
+            "latitude": place.latitude,
+            "longitude": place.longitude,
+            "owner": {
+                "id": owner.id,
+                "first_name": owner.first_name,
+                "last_name": owner.last_name,
+                "email": owner.email
+            },
+            "amenities": [{"id": a.id, "name": a.name} for a in amenities if a]
+        }
+
+    def get_all_places(self):
+        # Placeholder for logic to retrieve all places
+        return [
+            {
+                "id": p.id,
+                "title": p.title,
+                "latitude": p.latitude,
+                "longitude": p.longitude
+            }
+            for p in self.db.get_all_places()
+        ]
+
+    def update_place(self, place_id, place_data):
+        # Placeholder for logic to update a place
+        place = self.db.get_place_by_id(place_id)
+        if not place:
+            return None
+
+        try:
+            for key, value in place_data.items():
+                if hasattr(place, key):
+                    setattr(place, key, value)
+            self.db.update_place(place)
+            return place
+        except ValueError as e:
+            raise Exception(f"Invalid update data: {str(e)}")
