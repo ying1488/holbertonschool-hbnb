@@ -3,6 +3,7 @@ from app.persistence.repository import InMemoryRepository
 from app.models.user import User
 from app.models.place import Place
 from app.models.amenity import Amenity
+from app.models.review import Review
 
 class InvalidPlaceDataError(Exception):
     """Raised when place data is invalid."""
@@ -15,8 +16,7 @@ class InvalidPlaceUpdateError(Exception):
 
 class HBnBFacade:
     def __init__(self):
-        self.user_repo = InMemoryRepository()
-        self.place_repo = InMemoryRepository()
+                 
         self.review_repo = InMemoryRepository()
         self.amenity_repo = InMemoryRepository()
 
@@ -163,11 +163,19 @@ class HBnBFacade:
 
 def create_review(self, review_data):
     # Placeholder for logic to create a review, including validation for user_id, place_id, and rating
-    pass
+    try:
+        new_review = Review(**review_data)
+        self.review_repo.add(new_review)
+        return new_review
+    except ValueError as e:
+        raise InvalidReviewDataError(f"Invalid data: {str(e)}") from e
 
 def get_review(self, review_id):
     # Placeholder for logic to retrieve a review by ID
-    pass
+    review = self.review_repo.get(review_id)
+    if not review:
+        return None
+    owner = self.user_repo.get(review.owner_id)
 
 def get_all_reviews(self):
     # Placeholder for logic to retrieve all reviews
