@@ -45,13 +45,23 @@ class HBnBFacade:
         self.user_repo.save(user_id, user)
         return {"message": "User name updated successfully"}
     
-    def updae_user_email(self, user_id, email):
+    def update_user_email(self, user_id, email):
         user = self.user_repo.get(user_id)
         if not user:
             return None
         user.email = email
         self.user_repo.save(user_id, user)
         return {"message": "User email updated successfully"}
+    
+    def update_user(self, user_id, user_data):
+        user = self.user_repo.get(user_id)
+        if not user:
+            return None
+        for key, value in user_data.items():
+            if hasattr(user, key):
+                setattr(user, key, value)
+        self.user_repo.save(user_id, user)
+        return user
 
     # Placeholder method for fetching a place by ID
     def get_place(self, place_id):
