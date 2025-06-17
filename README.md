@@ -1,11 +1,13 @@
 # 🚀 HBnB Evolution
 a simplified version of an AirBnB-like application
 
+
 ## 📚 Table of Contents
 - About
 - High-Level Package Diagram
 - Business Logic Layer
 - Sequence Diagrams for API Calls
+
 
 
 ## 🧠 About
@@ -18,6 +20,7 @@ A high-level overview of system architecture using a layered approach.
 Detailed business logic design through class diagrams.
 Interaction modeling through sequence diagrams for core API operations.
 By clearly defining the responsibilities and interactions of each component, this documentation will guide the engineering team in implementing a maintainable and extendable system that aligns with clean architectural principles such as separation of concerns and single responsibility.
+
 
 
 
@@ -41,6 +44,7 @@ Purpose: Abstracts all direct interactions with the database.
 Communication between the layers leverages the: 
 Facade Pattern (Presentation Layer and Business Logic Layer)
 Database Operations (Business Logic and Persistence layers)
+
 
 
 
@@ -145,6 +149,7 @@ The Amenity entity represents a feature or facility that a renter can expect to 
 Many Amenities can be part of a Place
 
 
+
 ## 📬 API Interaction Flow
 The purpose of these diagrams is to illustrate how the API calls interact with different HBnB applications - Presentation, Business logic and Persistence layers. It helps to demonstrate how different components interact with each other to help with user requests and clarify responsibilities across the systems.
 
@@ -204,6 +209,7 @@ Design decisions and their rationale - the query-based interaction helps with th
 
 Summary for sequence diagrams
 These diagrams help to clarify the relationship between three layers - Presentation, Business Logic and Persistence using Facade Pattern at the service layer. The different component has single responsibility and a defined role. 
+
 
 ## 👨‍💻👩‍💻Developed By:
 * Jonathan Charalambous
