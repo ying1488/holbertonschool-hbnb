@@ -213,12 +213,24 @@ def get_review(self, review_id):
 
     return {
         "id":review.id,
-        
+        "text": review.text,
+        "rating": review.rating,
+        "owner":{
+
+        }
     }
 
 def get_all_reviews(self):
     # Placeholder for logic to retrieve all reviews
-    pass
+    return[
+        {
+            "id": r.id,
+            "title": r.title,
+            "latitude": r.latitude,
+            "longitude": r.longitude
+        }
+        for r in self.review_repo.all().values()
+    ]
 
 def get_reviews_by_place(self, place_id):
     # Placeholder for logic to retrieve all reviews for a specific place
