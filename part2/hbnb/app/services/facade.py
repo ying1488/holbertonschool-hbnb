@@ -242,7 +242,7 @@ def get_reviews_by_place(self, place_id):
 def update_review(self, review_id, review_data):
     # Placeholder for logic to update a review
         review = self.review_repo.get(review_id)
-        if not :
+        if not review:
             return None
 
         try:
