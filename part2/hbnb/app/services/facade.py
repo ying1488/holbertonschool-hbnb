@@ -12,7 +12,10 @@ class PlaceNotFoundError(Exception):
     """Raised when a place with the given ID is not found."""
 
 class InvalidPlaceUpdateError(Exception):
-    pass
+    """Raised when a review with the """
+
+class InvalidReviewDataError(Exception):
+    """Raised when review data is invalid."""
 
 class HBnBFacade:
     def __init__(self):
@@ -173,6 +176,17 @@ class HBnBFacade:
 
 def create_review(self, review_data):
     # Placeholder for logic to create a review, including validation for user_id, place_id, and rating
+    required_fields= ['user_id', 'place_id', 'rating']
+
+    #Check required fields
+    for field in required_fields:
+        if field not in review_data:
+            raise InvalidReviewDataError(f"Missing required:{field}")
+    
+    user_id = review_data.get('user_id')
+    place_id = review_data.get('place_id')
+    rating = review_data.get('rating')
+    
     try:
         new_review = Review(**review_data)
         self.review_repo.add(new_review)
@@ -186,6 +200,11 @@ def get_review(self, review_id):
     if not review:
         return None
     owner = self.user_repo.get(review.owner_id)
+
+    return {
+        "id":review.id,
+        
+    }
 
 def get_all_reviews(self):
     # Placeholder for logic to retrieve all reviews
