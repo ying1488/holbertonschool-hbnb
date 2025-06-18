@@ -44,7 +44,9 @@ class PlaceList(Resource):
                 "price": new_place.price,
                 "latitude": new_place.latitude,
                 "longitude": new_place.longitude,
-                # "owner_id": new_place.owner_id
+                "owner" : new_place.owner,
+                "amenities" : new_place.amenities,
+                "reviews" : new_place.reviews
             }, 201
         except Exception as e:
             abort(400, str(e))
