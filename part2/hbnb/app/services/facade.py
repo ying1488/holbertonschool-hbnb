@@ -14,6 +14,10 @@ class PlaceNotFoundError(Exception):
 class InvalidPlaceUpdateError(Exception):
     pass
 
+class InvalidReviewDataError(Exception):
+    """Custom exception for invalid review data."""
+    pass
+
 class HBnBFacade:
     def __init__(self):
                  
@@ -180,7 +184,19 @@ def create_review(self, review_data):
     user_id = review_data.get('user_id')
     place_id = review_data.get('place_id')
     rating = review_data.get('rating')
+
+    #Validate user and place exist
+    user = self.user_repo.get(user_id)
+    if not user:
+        raise InvalidReviewDataError(f"User with id '{user_id}' not found.")
     
+    place = self.place_repo.get(place_id)
+    if not place: 
+        raise InvalidReviewDataError(f"Place with id '{place_id}  not found.")
+    # Validate rating 
+    if not isinstance(rating, int) or not (1 <= rating <= 5):
+        raise InvalidReviewDataError("Rating must be an included")
+
     try:
         new_review = Review(**review_data)
         self.review_repo.add(new_review)
