@@ -12,14 +12,13 @@ class PlaceNotFoundError(Exception):
     """Raised when a place with the given ID is not found."""
 
 class InvalidPlaceUpdateError(Exception):
-    """Raised when a review with the """
-
-class InvalidReviewDataError(Exception):
-    """Raised when review data is invalid."""
+    pass
 
 class HBnBFacade:
     def __init__(self):
                  
+        self.user_repo = InMemoryRepository()
+        self.place_repo = InMemoryRepository()
         self.review_repo = InMemoryRepository()
         self.amenity_repo = InMemoryRepository()
 
@@ -65,11 +64,6 @@ class HBnBFacade:
                 setattr(user, key, value)
         self.user_repo.save(user_id, user)
         return user
-
-    # Placeholder method for fetching a place by ID
-    def get_place(self, place_id):
-        # Logic will be implemented in later tasks
-        pass
 
     # ---------- AMENITIES ----------
     
