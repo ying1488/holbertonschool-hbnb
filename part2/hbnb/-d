@@ -1,0 +1,16 @@
+{
+    "message": "415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'."
+}
+--_curl_--
+>   "title": "Cozy Apartment"
+--_curl_--
+>   "description": "A nice place to stay"
+--_curl_--
+>   "price": 100.0
+--_curl_--
+>   "latitude": 37.7749
+--_curl_--
+>   "longitude": -122.4194
+--_curl_--
+>   "owner_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+> 

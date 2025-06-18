@@ -177,83 +177,24 @@ class HBnBFacade:
     # ---------- REVIEWS ----------
 
 def create_review(self, review_data):
-    # Placeholder for logic to create a review, including validation for user_id, place_id, and rating
-    required_fields= ['user_id', 'place_id', 'rating']
-
-    #Check required fields
-    for field in required_fields:
-        if field not in review_data:
-            raise InvalidReviewDataError(f"Missing required:{field}")
-    
-    user_id = review_data.get('user_id')
-    place_id = review_data.get('place_id')
-    rating = review_data.get('rating')
-
-    #Validate user and place exist
-    user = self.user_repo.get(user_id)
-    if not user:
-        raise InvalidReviewDataError(f"User with id '{user_id}' not found.")
-    
-    place = self.place_repo.get(place_id)
-    if not place: 
-        raise InvalidReviewDataError(f"Place with id '{place_id}  not found.")
-    # Validate rating 
-    if not isinstance(rating, int) or not (1 <= rating <= 5):
-        raise InvalidReviewDataError("Rating must be an included")
-
-    try:
-        new_review = Review(**review_data)
-        self.review_repo.add(new_review)
-        return new_review
-    except ValueError as e:
-        raise InvalidReviewDataError(f"Invalid data: {str(e)}") from e
+    review = Review(**review_data)
+    self.review_repo.add(review)
+    return review
 
 def get_review(self, review_id):
     # Placeholder for logic to retrieve a review by ID
-    review = self.review_repo.get(review_id)
-    if not review:
-        return None
-    owner = self.user_repo.get(review.owner_id)
-
-    return {
-        "id":review.id,
-        "text": review.text,
-        "rating": review.rating,
-        "owner":{
-
-        }
-    }
+    return self.review_repo.get(review_id)
 
 def get_all_reviews(self):
     # Placeholder for logic to retrieve all reviews
-    return[
-        {
-            "id": r.id,
-            "title": r.title,
-            "latitude": r.latitude,
-            "longitude": r.longitude
-        }
-        for r in self.review_repo.all().values()
-    ]
+    return self.review_repo.all()
 
 def get_reviews_by_place(self, place_id):
     return self.review_repo.get_by_attribute('place_id', place_id)
 
 def update_review(self, review_id, review_data):
     # Placeholder for logic to update a review
-        review = self.review_repo.get(review_id)
-        if not review:
-            return None
-
-        try:
-            for key, value in review_data.items():
-                if hasattr(review, key):
-                    setattr(review, key, value)
-            self.place_repo.save(review_id, review)
-            return review
-        except ValueError as e:
-            raise InvalidReviewUpdateError(f"Invalid update data: {str(e)}") from e
-    
+    return self.review_repo.update(review_id, review_data)
 
 def delete_review(self, review_id):
     # Placeholder for logic to delete a review
