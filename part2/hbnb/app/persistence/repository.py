@@ -47,6 +47,8 @@ class InMemoryRepository(Repository):
         obj = self.get(obj_id)
         if obj:
             obj.update(data)
+            # for key in data:
+                #setattr(obj, key, data[key])
 
     def all(self):
         """Return all stored objects."""
