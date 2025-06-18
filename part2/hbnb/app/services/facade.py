@@ -1,7 +1,9 @@
 import uuid
 from app.persistence.repository import InMemoryRepository
 from app.models.user import User
+from app.models.place import Place
 from app.models.amenity import Amenity
+from app.models.review import Review
 
 class InvalidPlaceDataError(Exception):
     """Raised when place data is invalid."""
@@ -62,11 +64,6 @@ class HBnBFacade:
                 setattr(user, key, value)
         self.user_repo.save(user_id, user)
         return user
-
-    # Placeholder method for fetching a place by ID
-    def get_place(self, place_id):
-        # Logic will be implemented in later tasks
-        pass
 
     # ---------- AMENITIES ----------
     
