@@ -190,6 +190,7 @@ def get_all_reviews(self):
     return self.review_repo.all()
 
 def get_reviews_by_place(self, place_id):
+    #Placeholder for retrieve all reviews for a specific place
     return self.review_repo.get_by_attribute('place_id', place_id)
 
 def update_review(self, review_id, review_data):
@@ -198,4 +199,15 @@ def update_review(self, review_id, review_data):
 
 def delete_review(self, review_id):
     # Placeholder for logic to delete a review
-    pass
+    # Check if review is in the reviews
+    review = self.get_review(review_id)
+    if not review:
+        return False
+    # Remove review from place's reviews list
+    if review.place and hasattr(review.place, 'reviews'):
+        if review in review.place.reviews:
+            review.place.reviews.remove(review)
+    
+    # Delete from repository
+    self.review_repo.delete(review_id)
+    return True 
