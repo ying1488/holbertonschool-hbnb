@@ -1,8 +1,8 @@
 import uuid
 from app.persistence.repository import InMemoryRepository
 from app.models.user import User
-from app.models.place import Place
 from app.models.amenity import Amenity
+from app.models.place import Place
 
 class InvalidPlaceDataError(Exception):
     """Raised when place data is invalid."""
@@ -11,7 +11,7 @@ class PlaceNotFoundError(Exception):
     """Raised when a place with the given ID is not found."""
 
 class InvalidPlaceUpdateError(Exception):
-    pass
+    """Raised when a place udate is not found."""
 
 class HBnBFacade:
     def __init__(self):
