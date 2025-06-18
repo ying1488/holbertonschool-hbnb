@@ -18,6 +18,10 @@ class InvalidReviewDataError(Exception):
     """Custom exception for invalid review data."""
     pass
 
+class InvalidReviewUpdateError(Exception):
+    """Custom exception for invalid review data update"""
+    pass
+
 class HBnBFacade:
     def __init__(self):
                  
@@ -233,12 +237,23 @@ def get_all_reviews(self):
     ]
 
 def get_reviews_by_place(self, place_id):
-    # Placeholder for logic to retrieve all reviews for a specific place
-    pass
+    return self.review_repo.get_by_attribute('place_id', place_id)
 
 def update_review(self, review_id, review_data):
     # Placeholder for logic to update a review
-    pass
+        review = self.review_repo.get(review_id)
+        if not :
+            return None
+
+        try:
+            for key, value in review_data.items():
+                if hasattr(review, key):
+                    setattr(review, key, value)
+            self.place_repo.save(review_id, place)
+            return review
+        except ValueError as e:
+            raise InvalidReviewUpdateError(f"Invalid update data: {str(e)}") from e
+    
 
 def delete_review(self, review_id):
     # Placeholder for logic to delete a review
