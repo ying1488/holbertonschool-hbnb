@@ -249,7 +249,7 @@ def update_review(self, review_id, review_data):
             for key, value in review_data.items():
                 if hasattr(review, key):
                     setattr(review, key, value)
-            self.place_repo.save(review_id, place)
+            self.place_repo.save(review_id, review)
             return review
         except ValueError as e:
             raise InvalidReviewUpdateError(f"Invalid update data: {str(e)}") from e
