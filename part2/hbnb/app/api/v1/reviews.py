@@ -70,7 +70,9 @@ class ReviewResource(Resource):
     def get(self, review_id):
         """Get review details by ID"""
         # Placeholder for the logic to retrieve a review by ID
-        review = facade.get_review(), 200
+        review = facade.get_review(review_id)
+        if not review:
+            abort(404, "Review not found")
 
     @api.expect(review_model)
     @api.response(200, 'Review updated successfully')
