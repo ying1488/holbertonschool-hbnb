@@ -2,7 +2,6 @@ import uuid
 from app.persistence.repository import InMemoryRepository
 from app.models.user import User
 from app.models.amenity import Amenity
-from app.models.place import Place
 
 class InvalidPlaceDataError(Exception):
     """Raised when place data is invalid."""
@@ -15,8 +14,7 @@ class InvalidPlaceUpdateError(Exception):
 
 class HBnBFacade:
     def __init__(self):
-        self.user_repo = InMemoryRepository()
-        self.place_repo = InMemoryRepository()
+                 
         self.review_repo = InMemoryRepository()
         self.amenity_repo = InMemoryRepository()
 
@@ -45,13 +43,23 @@ class HBnBFacade:
         self.user_repo.save(user_id, user)
         return {"message": "User name updated successfully"}
     
-    def updae_user_email(self, user_id, email):
+    def update_user_email(self, user_id, email):
         user = self.user_repo.get(user_id)
         if not user:
             return None
         user.email = email
         self.user_repo.save(user_id, user)
         return {"message": "User email updated successfully"}
+    
+    def update_user(self, user_id, user_data):
+        user = self.user_repo.get(user_id)
+        if not user:
+            return None
+        for key, value in user_data.items():
+            if hasattr(user, key):
+                setattr(user, key, value)
+        self.user_repo.save(user_id, user)
+        return user
 
     # Placeholder method for fetching a place by ID
     def get_place(self, place_id):
@@ -158,3 +166,37 @@ class HBnBFacade:
             return place
         except ValueError as e:
             raise InvalidPlaceUpdateError(f"Invalid update data: {str(e)}") from e
+ 
+    # ---------- REVIEWS ----------
+
+def create_review(self, review_data):
+    # Placeholder for logic to create a review, including validation for user_id, place_id, and rating
+    try:
+        new_review = Review(**review_data)
+        self.review_repo.add(new_review)
+        return new_review
+    except ValueError as e:
+        raise InvalidReviewDataError(f"Invalid data: {str(e)}") from e
+
+def get_review(self, review_id):
+    # Placeholder for logic to retrieve a review by ID
+    review = self.review_repo.get(review_id)
+    if not review:
+        return None
+    owner = self.user_repo.get(review.owner_id)
+
+def get_all_reviews(self):
+    # Placeholder for logic to retrieve all reviews
+    pass
+
+def get_reviews_by_place(self, place_id):
+    # Placeholder for logic to retrieve all reviews for a specific place
+    pass
+
+def update_review(self, review_id, review_data):
+    # Placeholder for logic to update a review
+    pass
+
+def delete_review(self, review_id):
+    # Placeholder for logic to delete a review
+    pass
