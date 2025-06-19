@@ -210,10 +210,140 @@ Design decisions and their rationale - the query-based interaction helps with th
 Summary for sequence diagrams
 These diagrams help to clarify the relationship between three layers - Presentation, Business Logic and Persistence using Facade Pattern at the service layer. The different component has single responsibility and a defined role. 
 
+#### This is for tests for the api. 
+
+User tests
+
+curl -X POST http://localhost:5000/api/v1/users \
+     -H "Content-Type: application/json" \
+     -d '{"username": "alice", "password": "secret123"}'
+	 
+1. create user
+curl -X POST http://localhost:5000/api/v1/users/ \
+  -H "Content-Type: application/json" \
+  -d '{
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john.doe@example.com"
+}'
+
+
+2. Get a user
+curl -X GET http://localhost:5000/api/v1/users/<user_id> \
+  -H "Content-Type: application/json"
+  
+example
+curl -X GET http://localhost:5000/api/v1/users/8c1169cd-72e8-4986-b2d3-8c0286b96a9a\
+  -H "Content-Type: application/json"
+
+
+3. Retrieve a List of Users
+curl -X GET http://localhost:5000/api/v1/users/ \
+  -H "Content-Type: application/json"
+
+4. Update a User
+curl -X POST http://localhost:5000/api/v1/users/ \
+  -H "Content-Type: application/json" \
+  -d '{
+	"id": "750d7f1a-d689-4b1e-b5b1-3096b8b15cb0",
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john.doe@example.com"
+}'
+
+------------------------------------------------------------------------
+
+Amenity tests
+
+1. to test create new amenity
+curl -X POST http://127.0.0.1:5000/api/v1/amenities/ \
+     -H "Content-Type: application/json" \
+     -d '{"name": "Wi-Fi"}'
+
+2. Get all the amenities
+curl http://127.0.0.1:5000/api/v1/amenities/
+
+3. Retrieve the Amenity Using curl
+curl http://127.0.0.1:5000/api/v1/amenities/5f4cd562-c1ce-4243-a6d0-5e682f2db4f6
+
+4. Update an Amenity’s Information (PUT /api/v1/amenities/<amenity_id>)
+curl -X PUT http://127.0.0.1:5000/api/v1/amenities/<amenity_id> \
+     -H "Content-Type: application/json" \
+     -d '{"name": "Updated Amenity Name"}'
+	 
+example
+curl -X PUT http://127.0.0.1:5000/api/v1/amenities/5f4cd562-c1ce-4243-a6d0-5e682f2db4f6 \
+     -H "Content-Type: application/json" \
+     -d '{"name": "Sauna"}'
+
+----------------------------------------------------------------------------
+
+Place tests
+
+1. Create a Place
+curl -X POST http://127.0.0.1:5000/api/v1/places/ \
+     -H "Content-Type: application/json" \
+     -d '{
+           "title": "Cozy Cabin",
+           "description": "A nice cabin in the woods",
+           "price": 120.50,
+           "latitude": 44.123,
+           "longitude": -123.456,
+           "owner_id": "1fd74d1f-be5f-464c-92c8-bd4a78d8653e",
+           "amenities": ["12f0d75c-3f11-4fc2-ac8d-b7c42534d41a", "amenity-uuid-2"],
+           "reviews": []
+         }'
+
+2. Retrieve All Places
+curl -X GET http://localhost:5000/api/v1/places/ \
+  -H "Content-Type: application/json"
+
+3.Retrieve Place Details
+curl -X GET http://localhost:5000/api/v1/places/<place_id> \
+  -H "Content-Type: application/json"
+
+example
+curl -X GET http://localhost:5000/api/v1/places/1d6f5c8a-aea7-4e88-aae3-c02d2b827b92 \
+  -H "Content-Type: application/json"
+
+--------------------------------------------------------------------
+
+Review tests
+
+1. Register a New Review
+curl -X POST http://localhost:5000/api/v1/reviews/ \
+  -H "Content-Type: application/json" \
+  -d '{
+    "text": "Great place to stay!",
+    "rating": 5,
+    "user_id": "21a72d49-e215-4d1f-b6a2-6fc51e659207",
+    "place_id": "1d6f5c8a-aea7-4e88-aae3-c02d2b827b92"
+  }'
+
+2. Retrieve All Reviews 
+curl -X GET http://localhost:5000/api/v1/reviews/ -H "Content-Type: application/json"
+
+3. Retrieve a Review’s Details
+curl -X GET http://localhost:5000/api/v1/reviews/<review_id> -H "Content-Type: application/json"
+
+4. Update a Review’s Information
+curl -X PUT http://localhost:5000/api/v1/reviews/<review_id> \
+  -H "Content-Type: application/json" \
+  -d '{
+    "text": "Updated review text",
+    "rating": 4
+}'
+
+5. Delete a Review
+curl -X DELETE http://localhost:5000/api/v1/reviews/<review_id>
+
+6. Retrieve All Reviews for a Specific Place
+GET /api/v1/places/<place_id>/reviews
+
+
 
 ## 👨‍💻👩‍💻Developed By:
 * Jonathan Charalambous
 * Sophie 
 * Ying 
 * Eli Malana
-
