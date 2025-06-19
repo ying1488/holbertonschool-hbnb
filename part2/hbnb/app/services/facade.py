@@ -114,7 +114,23 @@ class HBnBFacade:
     def create_place(self, place_data):
         # Placeholder for logic to create a place, including validation for price, latitude, and longitude
         try:
-            new_place = Place(**place_data)
+            #Extract and validate owner
+            owner_id = place_data.pop('owner_id')
+            owner = self.user_repo.get(owner_id)  # Replace with your actual user repository
+
+            if not owner:
+                raise ValueError(f"Owner with ID '{owner_id}' not found")
+
+            # Extract amenities and process separately
+            amenity_ids = place_data.pop('amenities', [])
+            place_data.pop('reviews', None)  # Remove reviews if present
+            new_place = Place(owner=owner, **place_data)
+
+            for amenity_id in amenity_ids:
+                amenity = self.amenity_repo.get(amenity_id)
+                if amenity:
+                    new_place.add_amenity(amenity)
+
             self.place_repo.add(new_place)
             return new_place
         except ValueError as e:
@@ -125,7 +141,7 @@ class HBnBFacade:
         place = self.place_repo.get(place_id)
         if not place:
             return None
-        owner = self.user_repo.get(place.owner_id)
+        owner = self.user_repo.get(place.owner.id)
         amenities = [
         self.amenity_repo.get(amenity_id)
         for amenity_id in getattr(place, "amenities", [])

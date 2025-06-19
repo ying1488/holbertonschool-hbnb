@@ -76,7 +76,7 @@ class PlaceResource(Resource):
         place = facade.get_place(place_id)
         if not place:
             abort(404, "Place not found")
-        return place, 200
+        return place, 200       
 
 
     @api.expect(place_model)
