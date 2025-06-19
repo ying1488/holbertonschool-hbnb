@@ -142,11 +142,15 @@ class HBnBFacade:
         if not place:
             return None
         owner = self.user_repo.get(place.owner.id)
-        amenities = [
-        self.amenity_repo.get(amenity_id)
-        for amenity_id in getattr(place, "amenities", [])
-        if self.amenity_repo.get(amenity_id)
-        ]
+        amenities = []
+        for amenity in getattr(place, "amenities", []):
+            amenity_id = getattr(amenity, 'id', None)
+            if not amenity_id and isinstance(amenity, dict):
+                amenity_id = amenity.get('id')
+            if amenity_id:
+                amenity_obj = self.amenity_repo.get(amenity_id)
+                if amenity_obj:
+                    amenities.append(amenity_obj)
 
         return {
             "id": place.id,
@@ -160,7 +164,8 @@ class HBnBFacade:
                 "last_name": owner.last_name,
                 "email": owner.email
             },
-            "amenities": [{"id": a.id, "name": a.name} for a in amenities if a]
+            "amenities": [{"id": a["id"], "name": a["name"]} for a in amenities if a]
+
         }
 
     def get_all_places(self):
