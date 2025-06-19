@@ -53,11 +53,11 @@ class PlaceList(Resource):
                 "price": new_place.price,
                 "latitude": new_place.latitude,
                 "longitude": new_place.longitude,
-                "owner_id" : new_place.owner_id,
+                "owner_id" : new_place.owner.id,
                 "amenities" : new_place.amenities,
                 "reviews" : new_place.reviews
             }, 201
-        except Exception as e:
+        except ValueError as e:
             abort(400, str(e))
 
     @api.response(200, 'List of places retrieved successfully')
@@ -91,6 +91,5 @@ class PlaceResource(Resource):
             if not updated_place:
                 abort(404, "Place not found")
             return {"message": "Place updated successfully"}, 200
-        except Exception as e:
+        except ValueError as e:
             abort(400, str(e))
-
