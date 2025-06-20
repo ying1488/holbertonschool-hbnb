@@ -41,6 +41,11 @@ class InMemoryRepository(Repository):
         """Save or update a value by key."""
         self._storage[key] = value
 
+    """
+    def get(self, obj_id):
+        return self._storage.get(obj_id)
+    """
+
     def get(self, obj_id):
         return self._storage.get(obj_id)
 
