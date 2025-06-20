@@ -4,6 +4,28 @@ from app.models.base_model import BaseModel
 class User(BaseModel):
 
     def __init__(self, first_name, last_name, email, is_admin=False):
+
+        if first_name is None:
+            raise ValueError("Please provide a first name")
+        if len(first_name) > 50:
+            raise ValueError("First name cannot exceed 50 characters")
+        if isinstance(first_name, str) is False:
+            raise ValueError("First name cannot be a number")
+
+        if last_name is None:
+            raise ValueError("Please provide a last name")
+        if len(last_name) > 50:
+            raise ValueError("Last name cannot exceed 50 characters")
+        if isinstance(last_name, str) is False:
+            raise ValueError("Last name cannot be a number")
+
+        if email is None:
+            raise ValueError("Please provide an email")
+        if email.count('@') != 1:
+            raise ValueError("Email is not valid")
+        if len(email) > 100:
+            raise ValueError("Email cannot exceed 100 characters")
+
         super().__init__()
         self.first_name = first_name
         self.last_name = last_name
@@ -23,6 +45,18 @@ class User(BaseModel):
                 f"updated_at={self.updated_at})")
 
     def update_name(self, first_name=None, last_name=None):
+
+
+        if len(first_name) > 50:
+            raise ValueError("First name cannot exceed 50 characters")
+        if isinstance(first_name, str) is False:
+            raise ValueError("First name cannot be a number")
+
+        if len(last_name) > 50:
+            raise ValueError("Last name cannot exceed 50 characters")
+        if isinstance(last_name, str) is False:
+            raise ValueError("Last name cannot be a number")
+
         if first_name is not None:
             self.first_name = first_name
         if last_name is not None:
@@ -30,6 +64,14 @@ class User(BaseModel):
         self.save()
 
     def update_email(self, email):
+
+        if email is None:
+            raise ValueError("Please provide an email")
+        if email.count('@') != 1:
+            raise ValueError("Email is not valid")
+        if len(email) > 100:
+            raise ValueError("Email cannot exceed 100 characters")
+
         self.email = email
         self.save()
     
