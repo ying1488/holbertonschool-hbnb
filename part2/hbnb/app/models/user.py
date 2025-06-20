@@ -5,14 +5,14 @@ class User(BaseModel):
 
     def __init__(self, first_name, last_name, email, is_admin=False):
 
-        if first_name is None:
+        if first_name is None or first_name == "":
             raise ValueError("Please provide a first name")
         if len(first_name) > 50:
             raise ValueError("First name cannot exceed 50 characters")
         if isinstance(first_name, str) is False:
             raise ValueError("First name cannot be a number")
 
-        if last_name is None:
+        if last_name is None or last_name == "":
             raise ValueError("Please provide a last name")
         if len(last_name) > 50:
             raise ValueError("Last name cannot exceed 50 characters")
@@ -96,7 +96,3 @@ class User(BaseModel):
     
     def update(self, data):
         return super().update(data)
-
-    
-
-
