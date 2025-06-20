@@ -29,10 +29,14 @@ class Repository(ABC):
 class InMemoryRepository(Repository):
     def __init__(self):
         self._storage = {}
-
+    """
     def add(self, obj):
         self._storage[obj.id] = obj
-    
+    """
+    def add(self, obj):
+        self._storage[obj.id] = obj
+        return obj  # ✅ Add this line
+
     def save(self, key, value):
         """Save or update a value by key."""
         self._storage[key] = value
