@@ -197,38 +197,38 @@ class HBnBFacade:
  
     # ---------- REVIEWS ----------
 
-def create_review(self, review_data):
-    review = Review(**review_data)
-    self.review_repo.add(review)
-    return review
+    def create_review(self, review_data):
+        review = Review(**review_data)
+        self.review_repo.add(review)
+        return review
 
-def get_review(self, review_id):
-    # Placeholder for logic to retrieve a review by ID
-    return self.review_repo.get(review_id)
+    def get_review(self, review_id):
+        # Placeholder for logic to retrieve a review by ID
+        return self.review_repo.get(review_id)
 
-def get_all_reviews(self):
-    # Placeholder for logic to retrieve all reviews
-    return self.review_repo.all()
+    def get_all_reviews(self):
+        # Placeholder for logic to retrieve all reviews
+        return self.review_repo.all()
 
-def get_reviews_by_place(self, place_id):
-    #Placeholder for retrieve all reviews for a specific place
-    return self.review_repo.get_by_attribute('place_id', place_id)
+    def get_reviews_by_place(self, place_id):
+        #Placeholder for retrieve all reviews for a specific place
+        return self.review_repo.get_by_attribute('place_id', place_id)
 
-def update_review(self, review_id, review_data):
-    # Placeholder for logic to update a review
-    return self.review_repo.update(review_id, review_data)
+    def update_review(self, review_id, review_data):
+        # Placeholder for logic to update a review
+        return self.review_repo.update(review_id, review_data)
 
-def delete_review(self, review_id):
-    # Placeholder for logic to delete a review
-    # Check if review is in the reviews
-    review = self.get_review(review_id)
-    if not review:
-        return False
-    # Remove review from place's reviews list
-    if review.place and hasattr(review.place, 'reviews'):
-        if review in review.place.reviews:
-            review.place.reviews.remove(review)
+    def delete_review(self, review_id):
+        # Placeholder for logic to delete a review
+        # Check if review is in the reviews
+        review = self.get_review(review_id)
+        if not review:
+            return False
+        # Remove review from place's reviews list
+        if review.place and hasattr(review.place, 'reviews'):
+            if review in review.place.reviews:
+                review.place.reviews.remove(review)
     
-    # Delete from repository
-    self.review_repo.delete(review_id)
-    return True 
+        # Delete from repository
+        self.review_repo.delete(review_id)
+        return True 
