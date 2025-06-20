@@ -79,7 +79,7 @@ class ReviewList(Resource):
         all_reviews = facade.get_all_reviews()
         output = []
 
-        for review in all_reviews:
+        for review in all_reviews.values():
             output.append({
                 'id': str(review.id),
                 'text':review.text,
