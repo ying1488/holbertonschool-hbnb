@@ -343,7 +343,24 @@ GET /api/v1/places/<place_id>/reviews
 --------------------------------------------------------------------
 
 ## Swagger Documentation
-![Screenshot 2025-06-21 154637](https://github.com/user-attachments/assets/a4ea2062-7ee0-4129-a16f-5c8851add4ee)
+
+User API
+
+![Screenshot 2025-06-21 154653](https://github.com/user-attachments/assets/02ea4cc2-9281-4480-9a6c-5e05df306be3)
+
+Amenities API
+
+![Screenshot 2025-06-21 154752](https://github.com/user-attachments/assets/5603c5d5-a9e6-4ddb-867a-1c308ba70bd0)
+
+Places API
+
+![Screenshot 2025-06-21 154811](https://github.com/user-attachments/assets/79dbc862-76ed-4e5d-9c63-331096f50866)
+
+
+Reviews API
+
+![Screenshot 2025-06-21 154842](https://github.com/user-attachments/assets/f337a7b0-5495-430c-aef1-356096a8f691)
+
 
 ## 👨‍💻👩‍💻Developed By:
 * Jonathan Charalambous
