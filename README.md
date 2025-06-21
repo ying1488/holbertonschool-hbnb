@@ -374,6 +374,7 @@ test_create_user(self):
         })
 
 Response status: 201
+
 Response data: {'id': '28b15dcf-e9bb-4c61-b179-fcfdb5a49a7f', 'first_name': 'Jane', 'last_name': 'Doe', 'email': 'jane.doe@example.com'}
 
 
@@ -385,6 +386,7 @@ test_create_user_invalid_data(self):
         })
 
 .Response status: 400
+
 Response data: {'error': 'Please provide a first name'}
 
 
@@ -397,6 +399,7 @@ test_create_user_invalid_email(self):
 
 
 .Response status: 400
+
 Response data: {'error': 'Email is not valid'}
 
 response = self.client.post('/api/v1/users/', json={
@@ -407,6 +410,7 @@ response = self.client.post('/api/v1/users/', json={
 
 
 .Response status: 400
+
 Response data: {'error': 'First name cannot exceed 50 characters'}
 
 Ran 4 tests in 0.041s
