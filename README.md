@@ -362,6 +362,54 @@ Reviews API
 ![Screenshot 2025-06-21 154842](https://github.com/user-attachments/assets/f337a7b0-5495-430c-aef1-356096a8f691)
 
 
+------------------------------------------------------------------
+
+## Unit testing
+
+test_create_user(self):
+        response = self.client.post('/api/v1/users/', json={
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "email": "jane.doe@example.com"
+        })
+
+Response status: 201
+Response data: {'id': '28b15dcf-e9bb-4c61-b179-fcfdb5a49a7f', 'first_name': 'Jane', 'last_name': 'Doe', 'email': 'jane.doe@example.com'}
+
+test_create_user_invalid_data(self):
+        response = self.client.post('/api/v1/users/', json={
+            "first_name": "",
+            "last_name": "",
+            "email": "invalid-email"
+        })
+
+.Response status: 400
+Response data: {'error': 'Please provide a first name'}
+
+test_create_user_invalid_email(self):
+        response = self.client.post('/api/v1/users/', json={
+            "first_name": "Vega",
+            "last_name": "Balrog",
+            "email": "invalid-email"
+        })
+
+.Response status: 400
+Response data: {'error': 'Email is not valid'}
+
+response = self.client.post('/api/v1/users/', json={
+            "first_name": "jkdhajkshdjkashdjkahsjkdhjkashdjkashdkjhajksdhkjashdjkahsjkdhasjkdhajskhdahsjkhdak",
+            "last_name": "Balrog",
+            "email": "streetfighter@gmail.com"
+        })
+
+.Response status: 400
+Response data: {'error': 'First name cannot exceed 50 characters'}
+.
+----------------------------------------------------------------------
+Ran 4 tests in 0.041s
+
+OK
+
 ## 👨‍💻👩‍💻Developed By:
 * Jonathan Charalambous
 * Sophie 
