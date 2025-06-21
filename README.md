@@ -340,7 +340,10 @@ curl -X DELETE http://localhost:5000/api/v1/reviews/<review_id>
 6. Retrieve All Reviews for a Specific Place
 GET /api/v1/places/<place_id>/reviews
 
+--------------------------------------------------------------------
 
+## Swagger Documentation
+![Screenshot 2025-06-21 154637](https://github.com/user-attachments/assets/a4ea2062-7ee0-4129-a16f-5c8851add4ee)
 
 ## 👨‍💻👩‍💻Developed By:
 * Jonathan Charalambous
