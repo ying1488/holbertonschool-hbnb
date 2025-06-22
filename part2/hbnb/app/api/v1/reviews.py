@@ -96,14 +96,14 @@ class ReviewResource(Resource):
         # Placeholder for the logic to retrieve a review by ID
         review = facade.get_review(review_id)
         if not review:
-            abort(404, "Review not found")
+            return{'error': "Review not found"}, 404
         
         output = {
             'id': str(review.id),
             'text': review.text,
             'rating': review.rating,
-            'user_id': review.user_id,
-            'place_id': review.place_id
+            'user_id': review.user.id,
+            'place_id': review.place.id
         }
         return output, 200
 
@@ -140,7 +140,7 @@ class ReviewResource(Resource):
             facade.delete_review(review_id)
         except ValueError:
             return { 'error': "Review not found"}, 400
-        return {'message': "Review deleted successfuly"}, 200
+        return {'message': "Review deleted successfully"}, 200
 
 @api.route('/places/<place_id>/reviews')
 class PlaceReviewList(Resource):
@@ -158,7 +158,7 @@ class PlaceReviewList(Resource):
             'id': review.id,
             'text': review.text,
             'rating': review.rating,
-            'user_id': review.user_id,
+            'user_id': review.user.id,
         }
         for review in reviews:
             return output, 200
