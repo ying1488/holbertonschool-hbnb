@@ -1,3 +1,5 @@
 flask
 flask-restx
+flask
+flask-restx
 flask-bcrypt
