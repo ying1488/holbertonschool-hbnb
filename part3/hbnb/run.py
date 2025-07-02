@@ -11,13 +11,14 @@ app = create_app()
 
 
 if __name__ == '__main__':
-    user = User(first_name="John", last_name="Doe", email="john.doe@example.com")
+    user = User(first_name="John", last_name="Doe", email="john.doe@example.com", password="password123")
     assert user.first_name == "John"
     assert user.last_name == "Doe"
     assert user.email == "john.doe@example.com"
+    assert user.verify_password("password123")
     assert user.is_admin is False  # Default value
     print("User creation test passed!")
-    owner = User(first_name="Alice", last_name="Smith", email="alice.smith@example.com")
+    owner = User(first_name="Alice", last_name="Smith", email="alice.smith@example.com", password="password123")
     place = Place(title="Cozy Apartment", description="A nice place to stay", price=100, latitude=37.7749, longitude=-122.4194, owner=owner)
 
     # Adding a review
