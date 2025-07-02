@@ -27,6 +27,9 @@ class User(BaseModel):
         if len(email) > 100:
             raise ValueError("Email cannot exceed 100 characters")
 
+        if password is None or password == "":
+            raise ValueError("Please provide a password")
+
         super().__init__()
         self.first_name = first_name
         self.last_name = last_name
