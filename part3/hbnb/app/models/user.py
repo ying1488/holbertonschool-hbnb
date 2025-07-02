@@ -1,9 +1,10 @@
 from app.models.base_model import BaseModel
 
 
+
 class User(BaseModel):
 
-    def __init__(self, first_name, last_name, email, is_admin=False):
+    def __init__(self, first_name, last_name, email, password, is_admin=False):
 
         if first_name is None or first_name == "":
             raise ValueError("Please provide a first name")
@@ -30,12 +31,21 @@ class User(BaseModel):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
+        self.password = self.hash_password(password)
         self.is_admin = is_admin
         self.places = []
 
     def add_place(self, place):
         self.places.append(place)
         self.save()
+
+    def hash_password(self, password):
+        from app import bcrypt
+        return bcrypt.generate_password_hash(password).decode('utf-8')
+
+    def verify_password(self, password):
+        from app import bcrypt
+        return bcrypt.check_password_hash(self.password, password)
 
     def __str__(self):
         """Return a string representation of the User instance."""
