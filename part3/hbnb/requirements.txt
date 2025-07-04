@@ -3,3 +3,5 @@ flask-restx
 flask
 flask-restx
 flask-bcrypt
+sqlalchemy
+flask-sqlalchemy
