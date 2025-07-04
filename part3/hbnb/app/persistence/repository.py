@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from app import db
 
 class Repository(ABC):
     @abstractmethod
@@ -64,7 +65,6 @@ class InMemoryRepository(Repository):
 
     def get_by_attribute(self, attr_name, attr_value):
         return next((obj for obj in self._storage.values() if getattr(obj, attr_name) == attr_value), None)
-from app import db
 
 class SQLAlchemyRepository(Repository):
     def __init__(self, model):
