@@ -5,6 +5,16 @@ from app.persistence.repository import SQLAlchemyRepository
 class PlaceRepository(SQLAlchemyRepository):
 
     def __init__(self):
-        super().__init__(Place)
-    def get_user_by_email(self, email):
-        return self.model.query.filter_by(email=email).first()
+        self._data = {}
+    
+    def get(self, owner_id):
+        return self._data.get(owner_id)
+    
+    def add(self, new_place):
+        return self._data.add(new_place)
+    
+    def all(self):
+        return self._data.values
+    
+    def save(self, place_id, place)
+        self._data[place_id] = place
