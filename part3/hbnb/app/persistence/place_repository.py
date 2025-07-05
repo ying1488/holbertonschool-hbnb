@@ -1,4 +1,4 @@
-import app.models.place as Place
+from app.models.place import Place
 from app import db
 from app.persistence.repository import SQLAlchemyRepository
 
@@ -16,5 +16,5 @@ class PlaceRepository(SQLAlchemyRepository):
     def all(self):
         return self._data.values
     
-    def save(self, place_id, place)
+    def save(self, place_id, place):
         self._data[place_id] = place

@@ -1,4 +1,4 @@
-import app.models.amenity as Amenity
+from app.models.amenity import Amenity
 from app import db
 from app.persistence.repository import SQLAlchemyRepository
 
