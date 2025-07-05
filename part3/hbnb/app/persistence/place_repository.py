@@ -11,7 +11,8 @@ class PlaceRepository(SQLAlchemyRepository):
         return self._data.get(owner_id)
     
     def add(self, new_place):
-        return self._data.add(new_place)
+        self._data[new_place.id] = new_place
+        return new_place
     
     def all(self):
         return self._data.values
