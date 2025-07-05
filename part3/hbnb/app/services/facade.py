@@ -5,6 +5,8 @@ from app.models.place import Place
 from app.models.amenity import Amenity
 from app.models.review import Review
 from app.persistence.repository import SQLAlchemyRepository
+from app.persistence.user_repository import UserRepository
+
 
 class InvalidPlaceDataError(Exception):
     """Raised when place data is invalid."""
@@ -25,10 +27,11 @@ class InvalidReviewUpdateError(Exception):
 
 class HBnBFacade:
     def __init__(self):
-        self.user_repo = SQLAlchemyRepository(User)
+        self.user_repo = UserRepository()
 
     def create_user(self, user_data):
         user = User(**user_data)
+        user.hash_password(user_data['password'])
         self.user_repo.add(user)
         return user
 
