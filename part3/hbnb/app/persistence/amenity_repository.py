@@ -1,5 +1,4 @@
 from app.models.amenity import Amenity
-from app import db
 from app.persistence.repository import SQLAlchemyRepository
 
 class AmenityRepository(SQLAlchemyRepository):
@@ -15,3 +14,4 @@ class AmenityRepository(SQLAlchemyRepository):
 
     def all(self):
         return self._data.values
+    

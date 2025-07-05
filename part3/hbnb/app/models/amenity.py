@@ -1,7 +1,6 @@
 from app.models.base_model import BaseModel
-from app import db, bcrypt
 import uuid
-
+from app import db, bcrypt
 
 class Amenity(BaseModel):
 

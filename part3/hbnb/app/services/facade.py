@@ -1,9 +1,9 @@
 import uuid
-from app.persistence.repository import InMemoryRepository
 from app.models.user import User
 from app.models.place import Place
 from app.models.amenity import Amenity
 from app.models.review import Review
+from app import db
 from app.persistence.repository import SQLAlchemyRepository
 from app.persistence.user_repository import UserRepository
 from app.persistence.place_repository import PlaceRepository
