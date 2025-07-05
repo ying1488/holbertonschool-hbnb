@@ -6,6 +6,9 @@ from app.models.amenity import Amenity
 from app.models.review import Review
 from app.persistence.repository import SQLAlchemyRepository
 from app.persistence.user_repository import UserRepository
+from app.persistence.place_repository import PlaceRepository
+from app.persistence.amenity_repository import AmenityRepository
+from app.persistence.review_repository import ReviewRepository
 
 
 class InvalidPlaceDataError(Exception):
@@ -28,6 +31,7 @@ class InvalidReviewUpdateError(Exception):
 class HBnBFacade:
     def __init__(self):
         self.user_repo = UserRepository()
+        self.place_repo = PlaceRepository()
 
     def create_user(self, user_data):
         user = User(**user_data)
