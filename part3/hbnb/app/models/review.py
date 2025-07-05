@@ -4,6 +4,7 @@ from sqlalchemy import CheckConstraint
 
 
 class Review(BaseModel):
+    
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key=True)
