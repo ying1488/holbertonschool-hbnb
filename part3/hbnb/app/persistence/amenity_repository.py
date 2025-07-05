@@ -5,6 +5,13 @@ from app.persistence.repository import SQLAlchemyRepository
 class AmenityRepository(SQLAlchemyRepository):
 
     def __init__(self):
-        super().__init__(Amenity)
-    def get_user_by_email(self, email):
-        return self.model.query.filter_by(email=email).first()
+        self._data = {} 
+
+    def save(self, amenity_id, amenity):
+        self._data[amenity_id] = amenity
+    
+    def get(self, amenity_id):
+        return self._data.get(amenity_id)
+
+    def all(self):
+        return self._data.values

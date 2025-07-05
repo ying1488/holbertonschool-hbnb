@@ -32,6 +32,8 @@ class HBnBFacade:
     def __init__(self):
         self.user_repo = UserRepository()
         self.place_repo = PlaceRepository()
+        self.review_repo = ReviewRepository()
+        self.amenity_repo = AmenityRepository()
 
     def create_user(self, user_data):
         user = User(**user_data)
