@@ -1,5 +1,5 @@
 from app.models.base_model import BaseModel
-from app.extensions import db, bcrypt
+from app import db, bcrypt
 import uuid
 
 class User(BaseModel):
