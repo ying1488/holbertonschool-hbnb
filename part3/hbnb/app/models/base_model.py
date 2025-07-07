@@ -12,6 +12,8 @@ class BaseModel(db.Model):
     def save(self):
         """Update the updated_at timestamp whenever the object is modified"""
         self.updated_at = datetime.now()
+        db.session.add(self)
+        db.session.commit()
 
     def update(self, data):
         """Update the attributes of the object based on the provided dictionary"""
