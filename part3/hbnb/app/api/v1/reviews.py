@@ -3,7 +3,6 @@ from app.services import facade
 
 api = Namespace('reviews', description='Review operations')
 
-
 # Define the models for related entities
 user_model = api.model('PlaceUser', {
     'id': fields.String(description='User ID'),
@@ -30,14 +29,6 @@ review_model = api.model('Review', {
     'place_id': fields.String(required=True, description='ID of the place')
 })
 
-# {
-#   "id": "2fa85f64-5717-4562-b3fc-2c963f66afa6",
-#   "text": "Great place to stay!",
-#   "rating": 5,
-#   "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-#   "place_id": "1fa85f64-5717-4562-b3fc-2c963f66afa6"
-# }
-
 @api.route('/')
 class ReviewList(Resource):
     @api.expect(review_model)
@@ -49,40 +40,39 @@ class ReviewList(Resource):
 
         wanted_keys_list = ['text', 'rating', 'user_id', 'place_id']
 
-        # check that required attributes are present
-        if not all(name in wanted_keys_list for name in review_data):
-            return { 'error': "Invalid input data - required attributes missing" }, 400
+        # Check that required attributes are present
+        if not all(name in review_data for name in wanted_keys_list):
+            return {'error': "Invalid input data - required attributes missing"}, 400
 
-        # check that user exists
+        # Check that user exists
         user = facade.get_user(str(review_data.get('user_id')))
         if not user:
-            return { 'error': "Invalid input data - user does not exist" }, 400
+            return {'error': "Invalid input data - user does not exist"}, 400
 
-        # check that place exists
+        # Check that place exists
         place = facade.get_place(str(review_data.get('place_id')))
         if not place:
-            return { 'error': "Invalid input data - place does not exist" }, 400
+            return {'error': "Invalid input data - place does not exist"}, 400
 
-        # finally, create the review
+        # Finally, create the review
         new_review = None
         try:
             new_review = facade.create_review(review_data)
         except ValueError as error:
-            return { 'error': "Setter validation failure: {}".format(error) }, 400
+            return {'error': f"Setter validation failure: {error}"}, 400
 
         return {'id': str(new_review.id), 'message': 'Review created successfully'}, 201
 
     @api.response(200, 'List of reviews retrieved successfully')
     def get(self):
         """Retrieve a list of all reviews"""
-        # Placeholder for logic to return a list of all reviews
         all_reviews = facade.get_all_reviews()
         output = []
 
-        for review in all_reviews.values():
+        for review in all_reviews:  # <-- Fixed here: iterate directly over the list
             output.append({
                 'id': str(review.id),
-                'text':review.text,
+                'text': review.text,
                 'rating': review.rating
             })
         return output, 200
@@ -93,11 +83,10 @@ class ReviewResource(Resource):
     @api.response(404, 'Review not found')
     def get(self, review_id):
         """Get review details by ID"""
-        # Placeholder for the logic to retrieve a review by ID
         review = facade.get_review(review_id)
         if not review:
-            return{'error': "Review not found"}, 404
-        
+            return {'error': "Review not found"}, 404
+
         output = {
             'id': str(review.id),
             'text': review.text,
@@ -113,33 +102,34 @@ class ReviewResource(Resource):
     @api.response(400, 'Invalid input data')
     def put(self, review_id):
         """Update a review's information"""
-        # Placeholder for the logic to update a review by ID
         review_data = api.payload
-        wanted_keys_list = ['text', 'rating', 'user_id','place_id']
+        wanted_keys_list = ['text', 'rating', 'user_id', 'place_id']
 
-        #check that required attr are present 
-        if not all(name in wanted_keys_list for name in review_data):
-            return {'error': "Invalid input data = required attributes missing"}
-        
-        #check that place exists first before updating them 
+        # Check that required attributes are present
+        if not all(name in review_data for name in wanted_keys_list):
+            return {'error': "Invalid input data - required attributes missing"}, 400
+
         review = facade.get_review(review_id)
         if review:
             try:
                 facade.update_review(review_id, review_data)
             except ValueError as error:
-                return{ 'error': "Setter validation failure: {}".format(error)},400
+                return {'error': f"Setter validation failure: {error}"}, 400
 
-            return{'message': 'Review updated successfully'},200
+            return {'message': 'Review updated successfully'}, 200
+        else:
+            return {'error': 'Review not found'}, 404
 
     @api.response(200, 'Review deleted successfully')
     @api.response(404, 'Review not found')
     def delete(self, review_id):
         """Delete a review"""
-        # Placeholder for the logic to delete a review
         try:
-            facade.delete_review(review_id)
+            success = facade.delete_review(review_id)
+            if not success:
+                return {'error': 'Review not found'}, 404
         except ValueError:
-            return { 'error': "Review not found"}, 400
+            return {'error': "Review not found"}, 404
         return {'message': "Review deleted successfully"}, 200
 
 @api.route('/places/<place_id>/reviews')
@@ -148,17 +138,18 @@ class PlaceReviewList(Resource):
     @api.response(404, 'Place not found')
     def get(self, place_id):
         """Get all reviews for a specific place"""
-        # Placeholder for logic to return a list of reviews for a place
         place = facade.get_place(place_id)
         if not place:
             return {'error': 'Place not found'}, 404
-        
+
         reviews = facade.get_reviews_by_place(place_id)
-        output = {
-            'id': review.id,
-            'text': review.text,
-            'rating': review.rating,
-            'user_id': review.user.id,
-        }
-        for review in reviews:
-            return output, 200
+        output = []
+
+        for review in reviews:  # <-- Fixed here: iterate and accumulate all reviews
+            output.append({
+                'id': str(review.id),
+                'text': review.text,
+                'rating': review.rating,
+                'user_id': review.user.id,
+            })
+        return output, 200
