@@ -114,73 +114,41 @@ class HBnBFacade:
     # ---------- PLACES ----------
 
     def create_place(self, place_data):
-        # Placeholder for logic to create a place, including validation for price, latitude, and longitude
         try:
-            #Extract and validate owner
             owner_id = place_data.pop('owner_id')
-            owner = self.user_repo.get(owner_id)  # Replace with your actual user repository
+            # Fix if owner_id is tuple or list
+            if isinstance(owner_id, (tuple, list)):
+                owner_id = owner_id[0]
 
+            owner = self.user_repo.get(owner_id)
             if not owner:
                 raise ValueError(f"Owner with ID '{owner_id}' not found")
 
-            # Extract amenities and process separately
             amenity_ids = place_data.pop('amenities', [])
-            place_data.pop('reviews', None)  # Remove reviews if present
+            place_data.pop('reviews', None)
             new_place = Place(owner=owner, **place_data)
+            new_place.owner_r = owner  # make sure this matches your relationship name
 
             for amenity_id in amenity_ids:
                 amenity = self.amenity_repo.get(amenity_id)
                 if amenity:
-                    new_place.add_amenity(amenity)
+                    new_place.amenities_r.append(amenity)
 
             self.place_repo.add(new_place)
-            return new_place
+            return new_place.to_dict()
+
         except ValueError as e:
             raise InvalidPlaceDataError(f"Invalid data: {str(e)}") from e
-
+    
     def get_place(self, place_id):
-        # Placeholder for logic to retrieve a place by ID, including associated owner and amenities
         place = self.place_repo.get(place_id)
         if not place:
             return None
-        owner = self.user_repo.get(place.owner.id)
-        amenities = []
-        for amenity in getattr(place, "amenities", []):
-            amenity_id = getattr(amenity, 'id', None)
-            if not amenity_id and isinstance(amenity, dict):
-                amenity_id = amenity.get('id')
-            if amenity_id:
-                amenity_obj = self.amenity_repo.get(amenity_id)
-                if amenity_obj:
-                    amenities.append(amenity_obj)
-
-        return {
-            "id": place.id,
-            "title": place.title,
-            "description": place.description,
-            "latitude": place.latitude,
-            "longitude": place.longitude,
-            "owner": {
-                "id": owner.id,
-                "first_name": owner.first_name,
-                "last_name": owner.last_name,
-                "email": owner.email
-            },
-            "amenities": [{"id": a["id"], "name": a["name"]} for a in amenities if a]
-
-        }
+        return place.to_dict()
 
     def get_all_places(self):
-        # Placeholder for logic to retrieve all places
-        return [
-            {
-                "id": p.id,
-                "title": p.title,
-                "latitude": p.latitude,
-                "longitude": p.longitude
-            }
-            for p in self.place_repo.all().values()
-        ]
+        return [place.to_dict() for place in self.place_repo.all()]
+
 
     def update_place(self, place_id, place_data):
         # Placeholder for logic to update a place

@@ -42,21 +42,20 @@ class PlaceList(Resource):
     @api.response(201, 'Place successfully created')
     @api.response(400, 'Invalid input data')
     def post(self):
-        """Register a new place"""
-        # Placeholder for the logic to register a new place
+        # Register a new place
         try:
             new_place = facade.create_place(api.payload)
             return {
-                "id": new_place.id,
-                "title": new_place.title,
-                "description": new_place.description,
-                "price": new_place.price,
-                "latitude": new_place.latitude,
-                "longitude": new_place.longitude,
-                "owner_id" : new_place.owner.id,
-                "amenities" : new_place.amenities,
-                "reviews" : new_place.reviews
-            }, 201
+                    "id": new_place["id"],
+                    "title": new_place["title"],
+                    "description": new_place["description"],
+                    "price": new_place["price"],
+                    "latitude": new_place["latitude"],
+                    "longitude": new_place["longitude"],
+                    "owner_id": new_place["owner_id"],
+                    "amenities": new_place["amenities"],
+                    "reviews": new_place.get("reviews", [])
+                    }, 201
         except ValueError as e:
             abort(400, str(e))
 
