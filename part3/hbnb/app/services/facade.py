@@ -82,26 +82,22 @@ class HBnBFacade:
     # ---------- AMENITIES ----------
     
     def create_amenity(self, amenity_data):
-        # Placeholder for logic to create an amenity
         name = amenity_data.get('name')
         if not name:
             raise ValueError("Amenity name is required")
-        amenity_id = str(uuid.uuid4())
-        amenity = {
-            'id': amenity_id,
-            'name': name
-        }
-        self.amenity_repo.save(amenity_id, amenity)
-        return amenity
-
-    def get_amenity(self, amenity_id):
-        # Placeholder for logic to retrieve an amenity by ID
-        amenity = self.amenity_repo.get(amenity_id)
-        return amenity
+        amenity = Amenity(name=name)
+        self.amenity_repo.save(amenity)  # saves the object
+        return amenity.to_dict() 
 
     def get_all_amenities(self):
-        # Placeholder for logic to retrieve all amenities
-        return list(self.amenity_repo.all().values())
+        amenities = self.amenity_repo.all()
+        return [a.to_dict() for a in amenities]  # <-- convert all to dicts
+
+    def get_amenity(self, amenity_id):
+        amenity = self.amenity_repo.get(amenity_id)
+        if not amenity:
+            return None
+        return amenity.to_dict()
 
     def update_amenity(self, amenity_id, amenity_data):
         # Placeholder for logic to update an amenity
