@@ -10,8 +10,8 @@ class Review(BaseModel):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
-    place_r = relationship('Place', back_populates='reviews_r')
-    author_r = relationship('User', back_populates='reviews_r')
+    place_r = relationship('Place', back_populates='review_r')
+    author_r = relationship('User', back_populates='review_r')
 
     # Foreign keys
     place_id = db.Column(db.Integer, db.ForeignKey('places.id'), nullable=False)

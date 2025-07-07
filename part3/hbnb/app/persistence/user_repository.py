@@ -1,4 +1,4 @@
-import app.models.user as User
+from app.models.user import User
 # from app import db
 from app.persistence.repository import SQLAlchemyRepository
 
