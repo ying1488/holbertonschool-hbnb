@@ -6,8 +6,8 @@ class ReviewRepository(SQLAlchemyRepository):
     def __init__(self):
         self._data = {}
 
-    def get(self, review_data):
-        return self.get(review_data)
+    def get(self):
+        return self.review_repo.all()
     
     def add(self, review):
         self._data[review.id] = review
