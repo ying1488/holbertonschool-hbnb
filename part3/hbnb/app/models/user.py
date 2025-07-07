@@ -1,6 +1,8 @@
 from app.models.base_model import BaseModel
 from app.extensions import db, bcrypt
 import uuid
+import re
+from sqlalchemy.orm import relationship
 
 class User(BaseModel):
 
@@ -11,6 +13,8 @@ class User(BaseModel):
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
+    review_r = relationship("Review", back_populates="author_r")
+    properties_r = relationship("Place", back_populates="owner_r")
 
     def __init__(self, first_name, last_name, email, password, is_admin=False):
 
