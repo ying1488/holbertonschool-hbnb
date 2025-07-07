@@ -1,6 +1,9 @@
 from app.models.base_model import BaseModel
 import uuid
+import re
+from sqlalchemy.orm import relationship
 from app import db, bcrypt
+from app.models.place import place_amenities
 
 class Amenity(BaseModel):
 
@@ -10,6 +13,7 @@ class Amenity(BaseModel):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
+    places_r = relationship('Place', secondary=place_amenities, back_populates='amenities_r')
 
     def __init__(self, name):
         super().__init__()
