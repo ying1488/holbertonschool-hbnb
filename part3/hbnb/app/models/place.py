@@ -36,8 +36,24 @@ class Place(BaseModel):
         self.latitude = latitude
         self.longitude = longitude
         self.owner = owner
+        self.owner_id = owner.id,
         self.amenities = []
         self.reviews = []
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "price": self.price,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "owner_id": self.owner_id,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None,
+            "amenities": [amenity.to_dict() for amenity in self.amenities_r]
+        }
+
     
     def add_amenity(self, amenity):
         if amenity not in self.amenities:
