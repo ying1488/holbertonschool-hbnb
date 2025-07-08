@@ -1,9 +1,6 @@
 from app.models.base_model import BaseModel
 from app import db, bcrypt
 from sqlalchemy.orm import relationship
-import uuid
-
-import uuid
 
 # Association table between places and amenities (many-to-many)
 place_amenities = db.Table(
