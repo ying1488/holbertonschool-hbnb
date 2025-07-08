@@ -6,8 +6,9 @@ class PlaceRepository(SQLAlchemyRepository):
     def __init__(self):
         super().__init__(Place)  # Pass the model to the base class
 
-    def get(self, owner_id):
-        return Place.query.filter_by(owner_id=owner_id).first()
+    def get(self, place_id):
+        return Place.query.filter_by(id=place_id).first()
+
 
     def add(self, new_place):
         db.session.add(new_place)

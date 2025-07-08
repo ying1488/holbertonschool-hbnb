@@ -2,20 +2,21 @@ from app.models.base_model import BaseModel
 from app import db, bcrypt
 from sqlalchemy import CheckConstraint
 from sqlalchemy.orm import relationship
+import uuid
 
 class Review(BaseModel):
     
     __tablename__ = 'reviews'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(60), primary_key=True, default=lambda: str(uuid.uuid4()), nullable=False)
     text = db.Column(db.String(255), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     place_r = relationship('Place', back_populates='review_r')
     author_r = relationship('User', back_populates='review_r')
 
     # Foreign keys
-    place_id = db.Column(db.Integer, db.ForeignKey('places.id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    place_id = db.Column(db.String(60), db.ForeignKey('places.id'), nullable=False)
+    user_id = db.Column(db.String(60), db.ForeignKey('users.id'), nullable=False)
 
     # Constraints - Check for rating range, from 1 to 5
     __table_args__ = (
