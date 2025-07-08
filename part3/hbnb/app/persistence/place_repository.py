@@ -4,10 +4,10 @@ from app.persistence.repository import SQLAlchemyRepository
 
 class PlaceRepository(SQLAlchemyRepository):
     def __init__(self):
-        super().__init__(Place)
+        super().__init__(Place)  # Pass the model to the base class
 
-    def get(self, place_id):
-        return Place.query.get(place_id)
+    def get(self, owner_id):
+        return Place.query.filter_by(owner_id=owner_id).first()
 
     def add(self, new_place):
         db.session.add(new_place)
@@ -17,6 +17,11 @@ class PlaceRepository(SQLAlchemyRepository):
     def all(self):
         return Place.query.all()
 
-    def save(self, place_id, place):
-        db.session.commit()
+    def save(self, place_id, updated_place):
+        place = Place.query.get(place_id)
+        if place:
+            for key, value in vars(updated_place).items():
+                if key != 'id' and hasattr(place, key):
+                    setattr(place, key, value)
+            db.session.commit()
         return place
