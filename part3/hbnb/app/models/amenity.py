@@ -11,7 +11,7 @@ class Amenity(BaseModel):
 
     __tablename__ = 'amenities'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(60), primary_key=True, default=lambda: str(uuid.uuid4()), nullable=False)
     name = db.Column(db.String(50), nullable=False)
     places_r = relationship('Place', secondary=place_amenities, back_populates='amenities_r')
 
