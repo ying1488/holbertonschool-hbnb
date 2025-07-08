@@ -2,8 +2,6 @@ from app.models.base_model import BaseModel
 from app import db, bcrypt
 from sqlalchemy.orm import relationship
 
-import uuid
-
 # Association table between places and amenities (many-to-many)
 place_amenities = db.Table(
     'place_amenities',
@@ -25,8 +23,8 @@ class Place(BaseModel):
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     amenities_r = relationship('Amenity', secondary=place_amenities, back_populates='places_r')
-    owner_r = relationship("User", back_populates="properties_r")
-    review_r = relationship('Review', back_populates='place_r')
+    owner_r = relationship('User', back_populates='properties_r')
+    review_r = relationship('Review', back_populates='place_r', cascade='all, delete-orphan')
 
     def __init__(self, title, description, price, latitude, longitude, owner):
         super().__init__()
@@ -36,7 +34,7 @@ class Place(BaseModel):
         self.latitude = latitude
         self.longitude = longitude
         self.owner = owner
-        self.owner_id = owner.id,
+        self.owner_id = owner.id
         self.amenities = []
         self.reviews = []
     

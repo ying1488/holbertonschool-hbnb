@@ -26,8 +26,8 @@ class Review(BaseModel):
         super().__init__()
         self.text = text
         self.rating = rating
-        self.place = place
-        self.user = user
+        self.place_id = place.id
+        self.user_id = user.id
        
     def update_review(self, text=None, rating=None):
         """Update the review text and/or rating."""

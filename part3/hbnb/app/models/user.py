@@ -13,8 +13,8 @@ class User(BaseModel):
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
-    review_r = relationship("Review", back_populates="author_r")
-    properties_r = relationship("Place", back_populates="owner_r")
+    review_r = relationship('Review', back_populates='author_r', cascade='all, delete-orphan')
+    properties_r = relationship('Place', back_populates='owner_r')
 
     def __init__(self, first_name, last_name, email, password, is_admin=False):
 
@@ -63,4 +63,3 @@ class User(BaseModel):
                 f"email={self.email}, is_admin={self.is_admin}, "
                 f"id={self.id}, created_at={self.created_at}, "
                 f"updated_at={self.updated_at})")
-
