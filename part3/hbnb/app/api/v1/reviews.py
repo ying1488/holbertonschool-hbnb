@@ -45,12 +45,12 @@ class ReviewList(Resource):
             return {'error': "Invalid input data - required attributes missing"}, 400
 
         # Check that user exists
-        user = facade.get_user(str(review_data.get('user_id')))
+        user = facade.user_repo.get(str(review_data.get('user_id')))
         if not user:
             return {'error': "Invalid input data - user does not exist"}, 400
 
         # Check that place exists
-        place = facade.get_place(str(review_data.get('place_id')))
+        place = facade.place_repo.get(str(review_data.get('place_id')))
         if not place:
             return {'error': "Invalid input data - place does not exist"}, 400
 

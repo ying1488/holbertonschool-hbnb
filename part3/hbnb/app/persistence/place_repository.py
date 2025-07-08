@@ -3,20 +3,20 @@ from app import db
 from app.persistence.repository import SQLAlchemyRepository
 
 class PlaceRepository(SQLAlchemyRepository):
-
     def __init__(self):
-        self._data = {}
-    
-    def get(self, owner_id):
-        return self._data.get(owner_id)
-    
+        super().__init__(Place)
+
+    def get(self, place_id):
+        return Place.query.get(place_id)
+
     def add(self, new_place):
         db.session.add(new_place)
-        db.session.commit()  # commit to generate ID
+        db.session.commit()
         return new_place
-    
+
     def all(self):
-        return self._data.values()
-    
+        return Place.query.all()
+
     def save(self, place_id, place):
-        self._data[place_id] = place
+        db.session.commit()
+        return place
