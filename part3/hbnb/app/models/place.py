@@ -27,7 +27,7 @@ class Place(BaseModel):
 
     amenities_r = relationship('Amenity', secondary=place_amenities, back_populates='places_r')
     owner_r = relationship("User", back_populates="properties_r")
-    review_r = relationship('Review', back_populates='place_r', cascade="all, delete-orphan")
+    review_r = relationship('Review', back_populates='place_r')
 
     def __init__(self, title, description, price, latitude, longitude, owner):
         super().__init__()
