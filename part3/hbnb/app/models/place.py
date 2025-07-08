@@ -1,19 +1,21 @@
 from app.models.base_model import BaseModel
 from app import db, bcrypt
 from sqlalchemy.orm import relationship
+import uuid
 
 # Association table between places and amenities (many-to-many)
 place_amenities = db.Table(
     'place_amenities',
-    db.Column('place_id', db.Integer, db.ForeignKey('places.id'), primary_key=True),
-    db.Column('amenity_id', db.Integer, db.ForeignKey('amenities.id'), primary_key=True)
+    db.Column('place_id', db.String(60), db.ForeignKey('places.id'), primary_key=True),
+    db.Column('amenity_id', db.String(60), db.ForeignKey('amenities.id'), primary_key=True)
 )
+
 
 class Place(BaseModel):
 
     __tablename__ = 'places'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(60), primary_key=True, default=lambda: str(uuid.uuid4()), nullable=False)
     title = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
