@@ -10,7 +10,6 @@ place_amenities = db.Table(
     db.Column('amenity_id', db.String(60), db.ForeignKey('amenities.id'), primary_key=True)
 )
 
-
 class Place(BaseModel):
 
     __tablename__ = 'places'
@@ -22,7 +21,7 @@ class Place(BaseModel):
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
 
-    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    owner_id = db.Column(db.String(60), db.ForeignKey('users.id'), nullable=False)
 
     amenities_r = relationship('Amenity', secondary=place_amenities, back_populates='places_r')
     owner_r = relationship('User', back_populates='properties_r')
