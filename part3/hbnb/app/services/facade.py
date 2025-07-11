@@ -107,8 +107,8 @@ class HBnBFacade:
         name = amenity_data.get('name')
         if not name:
             raise ValueError("Amenity name is required")
-        amenity['name'] = name
-        self.amenity_repo.save(amenity_id, amenity)
+        amenity.name = name
+        self.amenity_repo.save(amenity)
         return {"message": "Amenity updated successfully"}
     
     # ---------- PLACES ----------
