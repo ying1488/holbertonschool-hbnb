@@ -36,15 +36,7 @@ class UserList(Resource):
     def get(self):
         """Get a list of all users"""
         users = facade.get_all_users()
-        return [
-            {
-                'id': user.id,
-                'first_name': user.first_name,
-                'last_name': user.last_name,
-                'email': user.email
-            }
-            for user in users
-        ], 200
+        return users, 200
 
 @api.route('/<user_id>')
 class UserResource(Resource):

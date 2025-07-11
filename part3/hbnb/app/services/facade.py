@@ -48,7 +48,7 @@ class HBnBFacade:
         return self.user_repo.get_by_attribute('email', email)
     
     def get_all_users(self):
-        return list(self.user_repo.all().values())
+        return [user.to_dict() for user in self.user_repo.all()]
     
     def update_user_name(self, user_id, first_name=None, last_name=None):
         user = self.user_repo.get(user_id)
@@ -170,6 +170,7 @@ class HBnBFacade:
     def create_review(self, review_data):
         user = self.user_repo.get(review_data['user_id'])
         place = self.place_repo.get(review_data['place_id'])
+
 
         if not user or not place:
             raise ValueError("User or Place not found")
