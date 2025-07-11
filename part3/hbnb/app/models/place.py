@@ -5,7 +5,7 @@ import uuid
 
 # Association table between places and amenities (many-to-many)
 place_amenities = db.Table(
-    'place_amenities',
+    'place_amenity',
     db.Column('place_id', db.String(60), db.ForeignKey('places.id'), primary_key=True),
     db.Column('amenity_id', db.String(60), db.ForeignKey('amenities.id'), primary_key=True)
 )
