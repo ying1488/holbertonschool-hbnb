@@ -4,7 +4,7 @@ import mysql.connector
 app = create_app()
 
 def run_sql_script(filename):
-    # Setup your DB connection params - adjust as needed
+    # Setup DB connection params
     conn = mysql.connector.connect(
         host='localhost',
         user='root',

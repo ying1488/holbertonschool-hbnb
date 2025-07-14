@@ -1,7 +1,12 @@
 -- Create and use the specified database
 CREATE DATABASE IF NOT EXISTS hbnb_evo_2_db;
 USE hbnb_evo_2_db;
-
+-- Drop tables if they already exist 
+DROP TABLE IF EXISTS `place_amenity`;
+DROP TABLE IF EXISTS `reviews`;
+DROP TABLE IF EXISTS `places`;
+DROP TABLE IF EXISTS `amenities`;
+DROP TABLE IF EXISTS `users`;
 -- Create users table
 CREATE TABLE `users` (
   `id` CHAR(36) NOT NULL,
