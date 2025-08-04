@@ -26,3 +26,11 @@ The following are the relationships between the entities:
 * User and Review (One-to-Many): A User can write many Reviews, but each Review is written by one User.
 
 * Place and Amenity (Many-to-Many): A Place can have many Amenities, and an Amenity can be associated with many Places.
+
+
+### Launching the Server & Database 
+Change Sql credentials to own machine
+Python3 run.py to start up the server
+Start up Mysql server 
+Start up Flask Shell to db.createall 
+ 
