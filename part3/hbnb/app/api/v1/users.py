@@ -1,6 +1,8 @@
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
 from flask_jwt_extended import create_access_token
+from flask import make_response
+from datetime import timedelta
 from flask import request
 from app import bcrypt
 
@@ -123,4 +125,14 @@ class UserLoginResource(Resource):
             return {'error': 'Invalid email or password'}, 401
 
         token = create_access_token(identity=user.id)
-        return {'token': token}, 200
+
+        response = make_response({'message': 'Login successful'})
+        response.set_cookie(
+            'token',
+            token,
+            httponly=True,
+            secure=False,
+            samesite='Lax',
+            max_age=60 * 60
+        )
+        return response

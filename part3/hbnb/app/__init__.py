@@ -12,7 +12,7 @@ bcrypt = Bcrypt()
 
 def create_app(config_class=config.DevelopmentConfig):
     app = Flask(__name__)
-    CORS(app)
+    CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
     app.config.from_object(config_class)
 
     app.config['JWT_SECRET_KEY'] = 'wonderful_secret_key'
