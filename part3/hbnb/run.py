@@ -6,9 +6,9 @@ app = create_app()
 def run_sql_script(filename):
     # Setup DB connection params
     conn = mysql.connector.connect(
-        host='localhost',
+        host='127.0.0.1',
         user='root',
-        password='root',
+        password='2Five2nine',
         database='hbnb_evo_2_db'
     )
     cursor = conn.cursor()
@@ -26,6 +26,6 @@ def run_sql_script(filename):
 
 if __name__ == '__main__':
     # Run the SQL schema setup before starting app
-    run_sql_script('app/hbnb_tables.sql')
+    #run_sql_script('app/hbnb_tables.sql')
     
     app.run(debug=True)

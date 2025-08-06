@@ -1,5 +1,10 @@
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
+from flask_jwt_extended import create_access_token
+from flask import make_response
+from datetime import timedelta
+from flask import request
+from app import bcrypt
 
 api = Namespace('users', description='User operations')
 
@@ -103,3 +108,31 @@ class UserUpdateResource(Resource):
             'last_name': updated_user.last_name,
             'email': updated_user.email
         }}, 200
+
+@api.route('/login')
+class UserLoginResource(Resource):
+    @api.expect(api.model('Login', {
+        'email': fields.String(required=True, description='Email of the user'),
+        'password': fields.String(required=True, description='Password of the user')
+    }), validate=True)
+    def post(self):
+        data = request.get_json()
+        email = data.get('email')
+        password = data.get('password')
+
+        user = facade.get_user_by_email(email)
+        if not user or not bcrypt.check_password_hash(user.password, password):
+            return {'error': 'Invalid email or password'}, 401
+
+        token = create_access_token(identity=user.id)
+
+        response = make_response({'message': 'Login successful'})
+        response.set_cookie(
+            'token',
+            token,
+            httponly=True,
+            secure=False,
+            samesite='Lax',
+            max_age=60 * 60
+        )
+        return response

@@ -58,7 +58,7 @@ class HBnBFacade:
             user.first_name = first_name
         if last_name:
             user.last_name = last_name
-        self.user_repo.save(user_id, user)
+        self.user_repo.update(user_id, user)
         return {"message": "User name updated successfully"}
     
     def update_user_email(self, user_id, email):
@@ -66,7 +66,7 @@ class HBnBFacade:
         if not user:
             return None
         user.email = email
-        self.user_repo.save(user_id, user)
+        self.user_repo.update(user_id, user)
         return {"message": "User email updated successfully"}
     
     def update_user(self, user_id, user_data):
@@ -76,7 +76,7 @@ class HBnBFacade:
         for key, value in user_data.items():
             if hasattr(user, key):
                 setattr(user, key, value)
-        self.user_repo.save(user_id, user)
+        self.user_repo.update(user_id, user)
         return user
 
     # ---------- AMENITIES ----------
@@ -196,7 +196,7 @@ class HBnBFacade:
 
     def get_reviews_by_place(self, place_id):
         #Placeholder for retrieve all reviews for a specific place
-        return self.review_repo.get_by_attribute('place_id', place_id)
+        return self.review_repo.get_by_attribute('place_id')
 
     def update_review(self, review_id, review_data):
         # Placeholder for logic to update a review

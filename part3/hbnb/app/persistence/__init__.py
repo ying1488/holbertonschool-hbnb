@@ -4,8 +4,8 @@ from sqlalchemy import create_engine, text, select
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 # Hardcoded credentials - PLEASE DON'T DO THIS IN PRODUCTION
-USER = "user"
-PWD = "user"
+USER = "root"
+PWD = "2Five2nine"
 HOST = "127.0.0.1"
 DB = "hbnb_evo_2_db"
 
