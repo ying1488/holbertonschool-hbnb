@@ -3,7 +3,7 @@
 ## 📝 Instructions
 ### 🖥️ Running the App 
 
-```python3 run.py```  
+```python3 run.py```
 
 
 ## 🗄️ Database & Relationship 
@@ -29,8 +29,7 @@ The following are the relationships between the entities:
 
 
 ### Launching the Server & Database 
-Change Sql credentials to own machine
-Python3 run.py to start up the server
-Start up Mysql server 
-Start up Flask Shell to db.createall 
- 
+* Change Sql credentials to own machine
+* Python3 run.py to start up the server
+* Start up Mysql server 
+* Start up Flask Shell to db.createall 
