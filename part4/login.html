@@ -1,24 +1,60 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UnEarthly</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Playfair Display', serif; }
+  </style>
 </head>
-<body>
+    
+
+<body class="bg-white text-gray-900">
+    <!-- Header -->
+    <header class="flex justify-between items-center px-10 py-5">
+    <div class="flex items-center space-x-2">
+      <div class="w-5 h-5 border border-black"></div>
+      <span class="text-xl">UnEarthly</span>
+    </div>
+    <button class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition">
+      Login
+    </button>
+    </header>
+
     <main>
-        <form id="login-form">
-            <h2>Login</h2>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            
-            <button type="submit">Login</button>
+    <div class="flex item-center justify-center">
+ <!-- Title of the page -->
+        <section class="text-center my-12">
+    <h1 class="hero-title inline-flex items-center text-[4.5rem] font-normal px-6 py-4 rounded">
+    Let's get started 
+    </h1>
+    </section>
+     </div>
+   
+
+    <!-- Log in form  -->
+    <div class="flex item-center justify-center">
+    <section class="flex justify-between items-center px-10 py-5">
+       <form id="login-form">
+          <h3>Email</h3>
+          <label for="email-address" class="sr-only">Email</label>
+          <input id="email-address-input" type="email-address" name="email-address-input" required class="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email"/>
+          
+          <h3>Password</h3>
+          <label for="password" class="sr-only">Password</label>          
+          <input id="password-input" type="password" name="password-input" required class="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="password-input"/>
+
+          <section class="py-5">
+          <button id="login-form" type="submit" class="flex-none rounded-md bg-black px-3.5 py-2.5 text-med font-semibold text-white shadow-xs hover:bg--500
+             focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline--500">Login</button>
+          <button id="register-form" type="submit" class="flex-none rounded-md bg-white-500 px-3.5 py-2.5 text-med border-4 text-black shadow-xs hover:bg-black-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black-500">Register</button>
+          </section>
         </form>
+    </section>
+    </div>
     </main>
     <script src="scripts.js"></script>
 </body>

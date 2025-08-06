@@ -1,33 +1,49 @@
-
-/* 
-  This is a SAMPLE File to get you started. Follow the instructions on the project to complete the tasks. 
-  You'll probably need to override some of theese styles.
-*/
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-
 body {
-    background-color: #f4f4f4;
-    color: #333;
+  font-family: 'Playfair Display', serif;
 }
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
+/* Logo */
+.logo-box {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  margin-right: 8px;
 }
 
-nav a {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 1rem;
+.logo-text {
+  font-size: 22px;
+  font-weight: 500;
 }
 
-main {
-    padding: 2rem;
+/* Hero Title */
+.hero-title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  font-weight: 400;
+  border: 1px solid #b285ff;
+  padding: 15px 25px;
+  border-radius: 3px;
+}
+
+/* Custom Arrow */
+.arrow {
+  width: 70px;
+  height: 25px;
+  margin-left: 15px;
+}
+
+/* Gallery */
+.gallery img {
+  border-radius: 5px;
+  width: 250px;
+  height: 350px;
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
