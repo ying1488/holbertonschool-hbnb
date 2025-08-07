@@ -4,7 +4,13 @@
 */
 
 document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('login-form');
+    loginUser();
+    displayPlaces();
+  });
+
+function loginUser() {
+
+  const loginForm = document.getElementById('login-form');
 
     if (loginForm) {
         loginForm.addEventListener('submit', async (event) => {
@@ -39,4 +45,81 @@ document.addEventListener('DOMContentLoaded', () => {
           loginUser(email, password);
         });
     }
-  });
+}
+
+function getCookie(cookie) {
+  const val = `; ${document.cookie}`;
+  const parts = val.split(`; ${cookie}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+
+}
+
+function checkAuthentication() {
+    const token = getCookie('token');
+    const loginLink = document.getElementById('login-link');
+
+    if (!token) {
+        loginLink.style.display = 'block';
+    } else {
+        loginLink.style.display = 'none';
+        fetchPlaces(token); 
+    }
+}
+
+async function getPlaces() {
+  
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/v1/places', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      credentials: 'include'
+    });
+    if (response.ok) {
+      const data = await response.json();
+      displayPlaces(data);
+    } else {
+      console.error('Failed to fetch places:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error fetching places:', error);
+  }
+}
+
+function displayPlaces(places) {
+    const placesList = document.getElementById('places-list');
+    placesList.innerHTML = '';
+
+    places.forEach(place => {
+        const placeEl = document.createElement('div');
+        placeEl.classList.add('place-item');
+        placeEl.dataset.price = place.price;
+
+        placeEl.innerHTML = `
+            <h3>${place.name}</h3>
+            <p>${place.description}</p>
+            <p><strong>Location:</strong> ${place.city}, ${place.country}</p>
+            <p><strong>Price:</strong> $${place.price}</p>
+        `;
+
+        placesList.appendChild(placeEl);
+    });
+}
+
+function setupFilterListener() {
+    const filter = document.getElementById('price-filter');
+    filter.addEventListener('change', () => {
+        const selectedPrice = filter.value;
+        const places = document.querySelectorAll('.place-item');
+
+        places.forEach(place => {
+            const price = parseFloat(place.dataset.price);
+            if (selectedPrice === 'all' || price <= parseFloat(selectedPrice)) {
+                place.style.display = 'block';
+            } else {
+                place.style.display = 'none';
+            }
+        });
+    });
+}
