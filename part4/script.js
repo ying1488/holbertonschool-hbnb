@@ -5,7 +5,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     loginUser();
-    displayPlaces();
+    checkAuthentication();
+    setupFilterListener();
   });
 
 function loginUser() {
@@ -25,7 +26,7 @@ function loginUser() {
             window.location.href = 'index.html';
             return;
           }
-          async function loginUser(email, password) {
+          async function loginRequest(email, password) {
           const response = await fetch('http://127.0.0.1:5000/api/v1/users/login', {
               method: 'POST',
               headers: {
@@ -42,7 +43,7 @@ function loginUser() {
               alert('Login failed: ' + response.statusText);
           }
           }
-          loginUser(email, password);
+          loginRequest(email, password);
         });
     }
 }
@@ -62,11 +63,11 @@ function checkAuthentication() {
         loginLink.style.display = 'block';
     } else {
         loginLink.style.display = 'none';
-        fetchPlaces(token); 
+        getPlaces(token);
     }
 }
 
-async function getPlaces() {
+async function getPlaces(token) {
   
   try {
     const response = await fetch('http://127.0.0.1:5000/api/v1/places', {

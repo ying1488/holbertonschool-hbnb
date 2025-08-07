@@ -38,21 +38,35 @@
     <!-- Log in form  -->
     <div class="flex item-center justify-center">
     <section class="flex justify-between items-center px-10 py-5">
-       <form id="login-form">
-          <h3>Email</h3>
-          <label for="email-address" class="sr-only">Email</label>
-          <input id="email" type="email-address" name="email-address-input" required class="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email"/>
-          
-          <h3>Password</h3>
-          <label for="password" class="sr-only">Password</label>          
-          <input id="password" type="password" name="password-input" required class="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="password-input"/>
+       <form id="login-form" class="space-y-4 w-full max-w-md">
 
-          <section class="py-5">
-          <button id="login" type="submit" class="flex-none rounded-md bg-black px-3.5 py-2.5 text-med font-semibold text-white shadow-xs hover:bg--500
-             focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline--500">Login</button>
-          <button id="register" type="submit" class="flex-none rounded-md bg-white-500 px-3.5 py-2.5 text-med border-4 text-black shadow-xs hover:bg-black-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black-500">Register</button>
-          </section>
-        </form>
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input id="email" type="email" name="email" required
+              class="mt-1 block w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your email" />
+      </div>
+
+   
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <input id="password" type="password" name="password" required
+              class="mt-1 block w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your password" />
+      </div>
+
+      <div class="flex justify-between items-center pt-5">
+        <button id="login" type="submit"
+                class="rounded-md bg-black px-4 py-2 text-white hover:bg-gray-800 transition">
+          Login
+        </button>
+        <button id="register" type="button"
+                onclick="window.location.href='register.html'"
+                class="rounded-md border-2 border-black px-4 py-2 text-black hover:bg-gray-100 transition">
+          Register
+        </button>
+      </div>
+    </form>
     </section>
     </div>
     </main>

@@ -18,7 +18,7 @@
       <div class="w-5 h-5 border border-black"></div>
       <span class="text-xl">Unearthly</span>
     </div>
-    <button class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition">
+    <button id="login-link" class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition">
       Login
     </button>
   </header>
@@ -35,26 +35,23 @@
   </section>
 
   <!-- Gallery -->
-   <!-- for each img looking to add a link to the place page -->
   <section id="places-list" class="flex justify-center flex-wrap gap-4 px-6 pb-10">
-    <img src="/holbertonschool-hbnb/part4/img/Bay.jpg" alt="Bay" class="w-[250px] h-[350px] object-cover rounded hover:scale-105 hover:shadow-lg transition">
-    <img src="/holbertonschool-hbnb/part4/img/hill.jpg" alt="Hill" class="w-[250px] h-[350px] object-cover rounded hover:scale-105 hover:shadow-lg transition">
-    <img src="/holbertonschool-hbnb/part4/img/mountain.jpg" alt="Mountains" class="w-[250px] h-[350px] object-cover rounded hover:scale-105 hover:shadow-lg transition">
-    <img src="/holbertonschool-hbnb/part4/img/Cabin.jpg" alt="Cabin" class="w-[250px] h-[350px] object-cover rounded hover:scale-105 hover:shadow-lg transition">
   </section>
+
+</section>
 
   <section id="filter">
     <label for="price-filter">Max Price:</label>
     <select id="price-filter">
+      <option value="all">All</option>
       <option value="10">10</option>
       <option value="50">50</option>
       <option value="100">100</option>
-      <option value="all">All</option>
     </select>
   </section>
         
 </main>
 
-        
+  <script src="script.js"></script>
 </body>
 </html>
