@@ -97,9 +97,9 @@ function displayPlaces(places) {
         placeEl.dataset.price = place.price;
 
         placeEl.innerHTML = `
-            <h3>${place.name}</h3>
+            <h3>${place.title}</h3>
             <p>${place.description}</p>
-            <p><strong>Location:</strong> ${place.city}, ${place.country}</p>
+            <p><strong>Location:</strong> ${place.country}</p>
             <p><strong>Price:</strong> $${place.price}</p>
         `;
 
