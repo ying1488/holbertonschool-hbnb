@@ -99,7 +99,6 @@ function displayPlaces(places) {
         placeEl.innerHTML = `
             <h3>${place.title}</h3>
             <p>${place.description}</p>
-            <p><strong>Location:</strong> ${place.country}</p>
             <p><strong>Price:</strong> $${place.price}</p>
         `;
 
