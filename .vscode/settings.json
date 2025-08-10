@@ -1,3 +1,5 @@
 {
-    "livePreview.defaultPreviewPath": "/part4/index.html"
+    "livePreview.defaultPreviewPath": "/part4/index.html",
+    "python-envs.pythonProjects": [],
+    "python-envs.defaultEnvManager": "ms-python.python:system"
 }
