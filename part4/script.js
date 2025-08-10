@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loginUser();
     checkAuthentication();
     setupFilterListener();
+    setupReviewForm();
   });
 
 function loginUser() {
@@ -122,4 +123,39 @@ function setupFilterListener() {
             }
         });
     });
+}
+
+function setupReviewForm() {
+  const reviewForm = document.getElementById('review-form');
+  if (!reviewForm) return; // If no form on the page, just exit
+
+  reviewForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const reviewText = document.getElementById('review-text').value.trim();
+    const placeId = document.getElementById('place-id').value;
+
+    if (!reviewText) {
+      alert('Please write a review before submitting.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/v1/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ review: reviewText, place_id: placeId })
+      });
+
+      if (response.ok) {
+        alert('Review submitted successfully!');
+        reviewForm.reset();
+      } else {
+        alert('Failed to submit review.');
+      }
+    } catch (error) {
+      console.error('Error submitting review:', error);
+      alert('An error occurred. Please try again later.');
+    }
+  });
 }
