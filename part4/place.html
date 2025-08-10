@@ -5,25 +5,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Place Details</title>
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Playfair Display', serif; }
+  </style>
 </head>
-<body>
+<body class="bg-white text-gray-900">
+    <header class="flex justify-between items-center px-10 py-5">
+    <div class="flex items-center space-x-2">
+      <div class="w-5 h-5 border border-black"></div>
+      <span class="text-xl">UnEarthly</span>
+    </div>
+    <button class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition">
+      Login
+    </button>
+    </header>
+
     <main>
-        <section id="place-details">
-            <!-- Place details will be populated dynamically -->
-        </section>
-        <section id="reviews">
+    <!-- Place details will be populated dynamically -->
+    <section id="place-details" class="max-w-6xl mx-auto p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+    <!-- Image of place -->
+    <div class="rounded-lg overflow-hidden">
+    <img src="img/Cabin.jpg" 
+           alt="Place Image" 
+           class="w-full h-full object-cover">
+    </div>
+
+    <!-- All the details about this place in this section,
+      idea is to have all the details in the back end
+      , presented in this format  -->
+
+    <div class="flex flex-col gap-6">
+    <div>
+        <h2 class="text-4xl font-normal mb-6">Place</h2>
+        <div class="space-y-4">
+          <div>
+            <h3 class="uppercase tracking-widest text-sm text-gray-600">Host</h3>
+            <p class="text-lg">John Doe</p>
+          </div>
+          <div>
+            <h3 class="uppercase tracking-widest text-sm text-gray-600">Description</h3>
+            <p class="text-lg">
+              A modern beachfront villa with stunning ocean views and cozy interiors.
+            </p>
+          </div>
+          <div>
+            <h3 class="uppercase tracking-widest text-sm text-gray-600">Price</h3>
+            <p class="text-lg">$250/night</p>
+          </div>
+          <div>
+            <h3 class="uppercase tracking-widest text-sm text-gray-600">Amenities</h3>
+            <ul class="list-disc list-inside text-lg">
+              <li>Beach Access</li>
+              <li>Private Pool</li>
+              <li>Free WiFi</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="uppercase tracking-widest text-sm text-gray-600">Lat, Long</h3>
+            <p class="text-lg">-8.4095, 115.1889</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </section>
+    </div>
+</div>
+</section>
+
+<div class="flex item-center justify-center">
+        <section id="reviews" class="max-w-6xl mx-auto p-6 mt-12">
             <!-- Reviews will be populated dynamically -->
-        </section>
-        <section id="add-review">
-            <h2>Add a Review</h2>
-            <form id="review-form">
-                <label for="review-text">Review:</label>
+        <h2 class="text-2xl font-normal mb-6">Reviews</h2>
+  
+<div class="space-y-6">
+    <!-- Review Card : idea is to populate the reviews in this format  -->
+    <div class="border-b border-gray-200 pb-4">
+      <p class="text-lg italic">"Amazing stay! Will come again."</p>
+      <p class="text-sm text-gray-600 mt-2">— Sarah, January 2025</p>
+    </div>
+
+    <div class="border-b border-gray-200 pb-4">
+      <p class="text-lg italic">"The view was breathtaking and the villa was spotless."</p>
+      <p class="text-sm text-gray-600 mt-2">— Alex, December 2024</p>
+    </div>
+
+    <div class="border-b border-gray-200 pb-4">
+      <p class="text-lg italic">"Perfect location and very friendly host."</p>
+      <p class="text-sm text-gray-600 mt-2">— Maria, November 2024</p>
+    </div>
+  </div>
+</section>
+</div>
+
+    <div class="flex item-center justify-center">
+    <section id="add-review" class="max-w-6xl mx-auto p-6 mt-12">
+        <h2 class="text-2xl font-normal mb-6">Add a Review</h2>
+            <form id="review-form" class="space-y-4 max-w-lg">
+                <label for="review-text" class="block text-sm font-medium text-gray-700">Review:</label>
                 <textarea id="review-text" name="review-text" required></textarea>
                 
-                <button type="submit">Submit</button>
+                <button type="submit" class="rounded-md border-2 border-black px-4 py-2 text-black hover:bg-gray-100 transition">Submit</button>
             </form>
         </section>
+     </div>
+
+
+        
+       
     </main>
     <script src="scripts.js"></script>
 </body>
