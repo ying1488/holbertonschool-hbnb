@@ -131,14 +131,14 @@ function setupReviewForm() {
 
   const reviewsList = document.getElementById('reviews-list');
   const token = getCookie('token');
-  const userId = getCookie('user_id'); // you’ll need to set this at login
+  const userId = getCookie('user_id'); // <-- now stored at login
 
   reviewForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const reviewText = document.getElementById('review-text').value.trim();
     const placeId = document.getElementById('place-id').value;
-    const rating = 5; // you can later make this dynamic with stars
+    const rating = 5; // static for now
 
     if (!reviewText) {
       alert('Please write a review before submitting.');
@@ -166,7 +166,6 @@ function setupReviewForm() {
         newReviewEl.className = 'p-4 border border-gray-300 rounded-md';
         newReviewEl.textContent = `${reviewText} (⭐ ${rating})`;
         reviewsList.appendChild(newReviewEl);
-
         reviewForm.reset();
       } else {
         const errData = await response.json();
