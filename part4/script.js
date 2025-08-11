@@ -127,13 +127,18 @@ function setupFilterListener() {
 
 function setupReviewForm() {
   const reviewForm = document.getElementById('review-form');
-  if (!reviewForm) return; // If no form on the page, just exit
+  if (!reviewForm) return;
+
+  const reviewsList = document.getElementById('reviews-list');
+  const token = getCookie('token');
+  const userId = getCookie('user_id'); // you’ll need to set this at login
 
   reviewForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const reviewText = document.getElementById('review-text').value.trim();
     const placeId = document.getElementById('place-id').value;
+    const rating = 5; // you can later make this dynamic with stars
 
     if (!reviewText) {
       alert('Please write a review before submitting.');
@@ -143,15 +148,29 @@ function setupReviewForm() {
     try {
       const response = await fetch('http://127.0.0.1:5000/api/v1/reviews', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ review: reviewText, place_id: placeId })
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          text: reviewText,
+          rating: rating,
+          user_id: userId,
+          place_id: placeId
+        })
       });
 
       if (response.ok) {
-        alert('Review submitted successfully!');
+        const newReviewEl = document.createElement('div');
+        newReviewEl.className = 'p-4 border border-gray-300 rounded-md';
+        newReviewEl.textContent = `${reviewText} (⭐ ${rating})`;
+        reviewsList.appendChild(newReviewEl);
+
         reviewForm.reset();
       } else {
-        alert('Failed to submit review.');
+        const errData = await response.json();
+        alert('Failed to submit review: ' + (errData.error || 'Unknown error'));
       }
     } catch (error) {
       console.error('Error submitting review:', error);
