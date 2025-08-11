@@ -131,14 +131,14 @@ function setupReviewForm() {
 
   const reviewsList = document.getElementById('reviews-list');
   const token = getCookie('token');
-  const userId = getCookie('user_id'); // <-- now stored at login
+  const userId = getCookie('user_id');
 
   reviewForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const reviewText = document.getElementById('review-text').value.trim();
+    const reviewText = document.getElementById('text').value.trim();
     const placeId = document.getElementById('place-id').value;
-    const rating = 5; // static for now
+    const rating = 5;
 
     if (!reviewText) {
       alert('Please write a review before submitting.');
@@ -154,10 +154,10 @@ function setupReviewForm() {
         },
         credentials: 'include',
         body: JSON.stringify({
-          text: reviewText,
+          text: text,
           rating: rating,
-          user_id: userId,
-          place_id: placeId
+          user_id: user,
+          place_id: place
         })
       });
 
