@@ -25,14 +25,30 @@
     <section id="add-review" class="max-w-6xl mx-auto p-6 mt-12">
         <h2 class="text-2xl font-normal mb-6">Add a Review</h2>
             <form id="review-form" class="space-y-4 max-w-lg">
-                <input type="hidden" id="place-id" name="place-id" value="1" />
-                <label for="text" class="block text-sm font-medium text-gray-700">Review:</label>
-                <textarea id="text" name="text" required
-                    class="w-full border border-gray-300 rounded-md p-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition resize-none"
-                    rows="4"
-                    placeholder="Write your review here..."></textarea>
-                <button type="submit" class="rounded-md border-2 border-black px-4 py-2 text-black hover:bg-gray-100 transition">Submit</button>
+              <label for="place-select" class="block text-sm font-medium text-gray-700">Select Place:</label>
+              <select id="place-select" name="place-select" required
+                      class="w-full border border-gray-300 rounded-md p-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition">
+                <option value="" disabled selected>Select a place</option>
+                <!-- Options will be dynamically inserted here -->
+              </select>
+              <select id="place-rating" name="place-rating" required
+                      class="w-full border border-gray-300 rounded-md p-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+                <!-- Options will be dynamically inserted here -->
+              </select>
+
+              <label for="text" class="block text-sm font-medium text-gray-700 mt-4">Review:</label>
+              <textarea id="text" name="text" required
+                  class="w-full border border-gray-300 rounded-md p-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition resize-none"
+                  rows="4"
+                  placeholder="Write your review here..."></textarea>
+              <button type="submit" class="rounded-md border-2 border-black px-4 py-2 text-black hover:bg-gray-100 transition">Submit</button>
             </form>
+
             <div id="reviews-list" class="mt-6 space-y-4">
             </div>
         </section>

@@ -126,7 +126,13 @@ class UserLoginResource(Resource):
 
         token = create_access_token(identity=user.id)
 
-        response = make_response({'message': 'Login successful'})
+        response_data = {
+            'message': 'Login successful',
+            'token': token,
+            'user_id': str(user.id)
+        }
+
+        response = make_response(response_data)
         response.set_cookie(
             'token',
             token,

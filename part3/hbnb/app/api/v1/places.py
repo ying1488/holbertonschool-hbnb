@@ -57,7 +57,7 @@ class PlaceList(Resource):
                     "reviews": new_place.get("reviews", [])
                     }, 201
         except ValueError as e:
-            abort(400, str(e))
+            return {'error': str(e)}, 400
 
     @api.response(200, 'List of places retrieved successfully')
     def get(self):
@@ -74,8 +74,8 @@ class PlaceResource(Resource):
         # Placeholder for the logic to retrieve a place by ID, including associated owner and amenities
         place = facade.get_place(place_id)
         if not place:
-            abort(404, "Place not found")
-        return place, 200       
+            return {'error': 'Place not found'}, 404
+        return place, 200
 
 
     @api.expect(place_model)
@@ -88,7 +88,7 @@ class PlaceResource(Resource):
         try:
             updated_place = facade.update_place(place_id, api.payload)
             if not updated_place:
-                abort(404, "Place not found")
+                return {'error': 'Place not found'}, 404
             return {"message": "Place updated successfully"}, 200
         except ValueError as e:
-            abort(400, str(e))
+            return {'error': str(e)}, 400
