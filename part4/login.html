@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UnEarthly</title>
+  <title>Unearthly</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -17,7 +17,7 @@
     <header class="flex justify-between items-center px-10 py-5">
     <div class="flex items-center space-x-2">
       <div class="w-5 h-5 border border-black"></div>
-      <span class="text-xl">UnEarthly</span>
+      <a href="/index.html"><span class="text-xl">Unearthly</span></a>
     </div>
     <button class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition">
       Login
@@ -56,9 +56,11 @@
       </div>
 
       <div class="flex justify-between items-center pt-5">
-        <button id="login" type="submit"
-                class="rounded-md bg-black px-4 py-2 text-white hover:bg-gray-800 transition">
+        <button id="login-link" class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition">
           Login
+        </button>
+        <button id="logout-btn" class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition">
+          Logout
         </button>
         <button id="register" type="button"
                 onclick="window.location.href='register.html'"
