@@ -17,28 +17,23 @@
       <div class="w-5 h-5 border border-black"></div>
       <a href="/index.html"><span class="text-xl">Unearthly</span></a>
     </div>
-    <button id="login-link" class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition">
-          Login
-    </button>
+    <a href="login.html"><button id="login-link" class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition">
+      Login
+    </button></a>
     <button id="logout-btn" class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition">
           Logout
     </button>
     </header>
 
     <main>
-    <!-- Place details will be populated dynamically -->
     <section id="place-details" class="max-w-6xl mx-auto p-6">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-    <!-- Image of place -->
     <div class="rounded-lg overflow-hidden">
     <img src="img/Cabin.jpg" 
            alt="Place Image" 
            class="w-full h-auto object-cover">
     </div>
-
-    <!-- All the details about this place in this section,
-      idea is to have all the details in the back end
-      , presented in this format  -->
+   
 
     <div class="flex flex-col gap-6">
     <div>
@@ -77,11 +72,9 @@
 
 <div class="flex item-center justify-center">
         <section id="reviews" class="max-w-6xl mx-auto p-6 mt-12">
-            <!-- Reviews will be populated dynamically -->
         <h2 class="text-2xl font-normal mb-6">Reviews</h2>
   
 <div class="space-y-6">
-    <!-- Review Card : idea is to populate the reviews in this format  -->
     <div class="border-b border-gray-200 pb-4">
       <p class="text-lg italic">"Amazing stay! Will come again."</p>
       <p class="text-sm text-gray-600 mt-2">— Sarah, January 2025</p>

@@ -23,14 +23,12 @@ function loginUser() {
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
 
-        // Test bypass
         if (email === 'test@test' && password === 'test') {
             setCookie('token', 'fake_test_token', 1);
             window.location.href = 'index.html';
             return;
         }
 
-        // Real login
         try {
             const response = await fetch('http://127.0.0.1:5000/api/v1/users/login', {
                 method: 'POST',
@@ -85,6 +83,7 @@ function checkAuthentication() {
     const isLoggedIn = !!token;
 
     if (loginLink) {
+        
         loginLink.style.display = isLoggedIn ? 'none' : 'block';
     }
     if (logoutBtn) {
@@ -99,8 +98,8 @@ function setupLogout() {
     if (!logoutBtn) return;
 
     logoutBtn.addEventListener('click', () => {
-        setCookie('token', '', -1); // delete token
-        setCookie('user_id', '', -1); // delete user id
+        setCookie('token', '', -1);
+        setCookie('user_id', '', -1);
         window.location.href = '/login.html';
     });
 }
@@ -224,7 +223,7 @@ function setupReviewForm() {
 }
 
 async function populatePlaceDropdown() {
-    const token = getCookie('token'); // make sure you have this function
+    const token = getCookie('token');
     if (!token) {
         console.error("No token found. Cannot load places.");
         return;
@@ -250,14 +249,12 @@ async function populatePlaceDropdown() {
             return;
         }
 
-        // Clear and add default placeholder
         select.innerHTML = '<option value="" disabled selected>Select a place</option>';
 
-        // Populate dropdown
         places.forEach(place => {
             const option = document.createElement('option');
-            option.value = place.id;        // This will be the value sent on form submit
-            option.textContent = place.title; // This is what the user sees
+            option.value = place.id;
+            option.textContent = place.title;
             select.appendChild(option);
         });
 
@@ -270,7 +267,7 @@ async function populatePlaceDropdown() {
 async function loadPlaceDetails() {
     const params = new URLSearchParams(window.location.search);
     const placeId = params.get('id');
-    if (!placeId) return; // no id in URL, nothing to load
+    if (!placeId) return;
 
     const token = getCookie('token');
     if (!token) {
