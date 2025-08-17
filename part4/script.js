@@ -292,23 +292,18 @@ async function loadPlaceDetails() {
 
         const place = await response.json();
 
-        // ill in the details dynaFmically
+        
         const detailsSection = document.getElementById('place-details');
         detailsSection.innerHTML = `
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
             <div class="rounded-lg overflow-hidden">
-              <img src="${place.image_url || 'img/placeholder.jpg'}" 
-                   alt="${place.title}" 
-                   class="w-full h-full object-cover">
+              <img src="img/Cabin.jpg" class="w-full h-auto object-cover">
             </div>
             <div class="flex flex-col gap-6">
               <div>
                 <h2 class="text-4xl font-normal mb-6">${place.title}</h2>
                 <div class="space-y-4">
-                  <div>
-                    <h3 class="uppercase tracking-widest text-sm text-gray-600">Host</h3>
-                    <p class="text-lg">${place.host || 'Unknown'}</p>
-                  </div>
+                  
                   <div>
                     <h3 class="uppercase tracking-widest text-sm text-gray-600">Description</h3>
                     <p class="text-lg">${place.description || 'No description provided.'}</p>
@@ -320,7 +315,7 @@ async function loadPlaceDetails() {
                   <div>
                     <h3 class="uppercase tracking-widest text-sm text-gray-600">Amenities</h3>
                     <ul class="list-disc list-inside text-lg">
-                      ${(place.amenities || []).map(a => `<li>${a}</li>`).join('')}
+                      ${(await getAmenities() || []).map(a => `<li>${a}</li>`).join('')}
                     </ul>
                   </div>
                   <div>
@@ -334,5 +329,33 @@ async function loadPlaceDetails() {
         `;
     } catch (error) {
         console.error('Error fetching place details:', error);
+    }
+}
+
+
+async function getAmenities() {
+    const token = getCookie('token');
+    if (!token) {
+        console.error("No token found. Cannot load amenities.");
+        return [];
+    }
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/api/v1/amenities', {
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ${token}` },
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            console.error('Failed to fetch amenities:', response.status, response.statusText);
+            return [];
+        }
+
+        const amenities = await response.json();
+        return amenities.map(a => a.name);
+    } catch (error) {
+        console.error('Error fetching amenities:', error);
+        return [];
     }
 }
