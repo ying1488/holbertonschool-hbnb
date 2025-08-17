@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     populatePlaceDropdown();
     setupReviewForm();
     setupLogout();
+    loadPlaceDetails();
 });
 
 function loginUser() {
@@ -127,20 +128,24 @@ async function getPlaces() {
 }
 
 function displayPlaces(places) {
-    const container = document.getElementById('places-list');
-    container.innerHTML = ''; // clear old items
+  const container = document.getElementById('places-list');
+  container.innerHTML = '';
 
-    places.forEach(place => {
-        const card = document.createElement('div');
-        card.classList.add('place-card');
-        card.innerHTML = `
-            <h3>${place.title}</h3>
-            <p>${place.description}</p>
-            <p>Price: $${place.price}</p>
-        `;
-        container.appendChild(card);
-    });
+  places.forEach(place => {
+    const link = document.createElement('a');
+    link.href = `place.html?id=${place.id}`;
+    link.className = 'place-card block p-4 border rounded hover:bg-gray-100 transition';
+    link.dataset.price = place.price;
+
+    link.innerHTML = `
+      <h3 class="text-xl font-semibold">${place.title}</h3>
+      <p class="text-sm text-gray-600">$${place.price}</p>
+    `;
+
+    container.appendChild(link);
+  });
 }
+
 
 
 function setupFilterListener() {
@@ -149,7 +154,7 @@ function setupFilterListener() {
 
     filter.addEventListener('change', () => {
         const selectedPrice = filter.value;
-        const places = document.querySelectorAll('.place-item');
+        const places = document.querySelectorAll('.place-card');
 
         places.forEach(place => {
             const price = parseFloat(place.dataset.price);
@@ -178,7 +183,7 @@ function setupReviewForm() {
         const placeSelect = document.getElementById('place-select');
         const placeId = placeSelect ? placeSelect.value : null;
 
-        const rating = document.getElementById('place-rating').value;
+        const rating = document.getValueById('place-rating');
 
         if (!reviewText) {
             alert('Please write a review before submitting.');
@@ -262,3 +267,72 @@ async function populatePlaceDropdown() {
 }
 
 
+async function loadPlaceDetails() {
+    const params = new URLSearchParams(window.location.search);
+    const placeId = params.get('id');
+    if (!placeId) return; // no id in URL, nothing to load
+
+    const token = getCookie('token');
+    if (!token) {
+        console.error("No token found. Cannot load place details.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}`, {
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ${token}` },
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            console.error('Failed to fetch place:', response.status, response.statusText);
+            return;
+        }
+
+        const place = await response.json();
+
+        // ill in the details dynaFmically
+        const detailsSection = document.getElementById('place-details');
+        detailsSection.innerHTML = `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            <div class="rounded-lg overflow-hidden">
+              <img src="${place.image_url || 'img/placeholder.jpg'}" 
+                   alt="${place.title}" 
+                   class="w-full h-full object-cover">
+            </div>
+            <div class="flex flex-col gap-6">
+              <div>
+                <h2 class="text-4xl font-normal mb-6">${place.title}</h2>
+                <div class="space-y-4">
+                  <div>
+                    <h3 class="uppercase tracking-widest text-sm text-gray-600">Host</h3>
+                    <p class="text-lg">${place.host || 'Unknown'}</p>
+                  </div>
+                  <div>
+                    <h3 class="uppercase tracking-widest text-sm text-gray-600">Description</h3>
+                    <p class="text-lg">${place.description || 'No description provided.'}</p>
+                  </div>
+                  <div>
+                    <h3 class="uppercase tracking-widest text-sm text-gray-600">Price</h3>
+                    <p class="text-lg">$${place.price}/night</p>
+                  </div>
+                  <div>
+                    <h3 class="uppercase tracking-widest text-sm text-gray-600">Amenities</h3>
+                    <ul class="list-disc list-inside text-lg">
+                      ${(place.amenities || []).map(a => `<li>${a}</li>`).join('')}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="uppercase tracking-widest text-sm text-gray-600">Lat, Long</h3>
+                    <p class="text-lg">${place.latitude}, ${place.longitude}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+    } catch (error) {
+        console.error('Error fetching place details:', error);
+    }
+}
